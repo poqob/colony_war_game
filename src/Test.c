@@ -1,17 +1,20 @@
 #include <stdio.h>
-#include "../include/utils/LinkedList.h"
+#include "../include/utils/ArrayList.h"
 
 int main()
 {
-    LinkedList *list = getLinkedList();
+    ArrayList *list = createArrayList(10);
+
     append(list, 10);
     append(list, 20);
     append(list, 30);
 
-    Node *firstNode = list->head;
-    printf("Content of first node: %d\n", getNodeData(firstNode));
+    int firstElement = get(list, 0);
+    int listSize = size(list);
 
-    // Print the entire linked list
-    displayList(list);
+    display(list);
+    destroyArrayList(list);
+    // Rest of your code goes here
+
     return 0;
 }
