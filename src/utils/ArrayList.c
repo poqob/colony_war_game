@@ -2,30 +2,31 @@
 #include <stdlib.h>
 #include "../../include/utils/ArrayList.h"
 
-struct ArrayList
+ArrayList createArrayList(int initialCapacity)
 {
-    int *array;
-    int size;
-    int capacity;
-};
+    ArrayList this;
 
-ArrayList *createArrayList(int initialCapacity)
-{
-    ArrayList *list = (ArrayList *)malloc(sizeof(ArrayList));
-    list->array = (int *)malloc(initialCapacity * sizeof(int));
-    list->size = 0;
-    list->capacity = initialCapacity;
-    return list;
+    this = (ArrayList)malloc(sizeof(ArrayList));
+    this->array = (int *)malloc(initialCapacity * sizeof(int));
+    this->size = 0;
+    this->capacity = initialCapacity;
+    this->destroyArrayList = &destroyArrayList;
+    this->append = &append;
+
+    this->display = &display;
+    this->get = &get;
+    this->getSize = &getSize;
+    return this;
 }
 
-void destroyArrayList(ArrayList *list)
+void destroyArrayList(ArrayList list)
 {
     free(list->array);
     free(list);
-    printf("list destroyed");
+    printf("ArrayList destroyed.\n");
 }
 
-void append(ArrayList *list, int data)
+void append(ArrayList list, int data)
 {
     if (list->size >= list->capacity)
     {
@@ -39,7 +40,7 @@ void append(ArrayList *list, int data)
     list->size++;
 }
 
-int get(ArrayList *list, int index)
+int get(const ArrayList list, int index)
 {
     if (index >= 0 && index < list->size)
     {
@@ -52,12 +53,12 @@ int get(ArrayList *list, int index)
     }
 }
 
-int size(ArrayList *list)
+int getSize(ArrayList list)
 {
     return list->size;
 }
 
-void display(ArrayList *list)
+void display(const ArrayList list)
 {
     printf("List: ");
     for (int i = 0; i < list->size; i++)

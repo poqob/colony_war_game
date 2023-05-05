@@ -3,18 +3,19 @@
 
 int main()
 {
-    ArrayList *list = createArrayList(10);
+    ArrayList list = createArrayList(10);
 
-    append(list, 10);
-    append(list, 20);
-    append(list, 30);
+    list->append(list, 10);
+    list->append(list, 20);
+    list->append(list, 30);
+    int listSize = getSize(list);
 
     int firstElement = get(list, 0);
-    int listSize = size(list);
 
-    display(list);
+    list->display(list);
     destroyArrayList(list);
-    // Rest of your code goes here
+
+    printf("sss");
 
     return 0;
 }
