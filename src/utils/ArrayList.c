@@ -2,31 +2,19 @@
 #include <stdlib.h>
 #include "../../include/utils/ArrayList.h"
 
-ArrayList createArrayList(int initialCapacity)
+void destroyArrayList(ArrayList *list)
 {
-    ArrayList this;
-
-    this = (ArrayList)malloc(sizeof(ArrayList));
-    this->array = (int *)malloc(initialCapacity * sizeof(int));
-    this->size = 0;
-    this->capacity = initialCapacity;
-    this->destroyArrayList = &destroyArrayList;
-    this->append = &append;
-
-    this->display = &display;
-    this->get = &get;
-    this->getSize = &getSize;
-    return this;
+    if (list == NULL)
+        return;
+    else
+    {
+        free(list->array);
+        free(list);
+        printf("ArrayList destroyed.\n");
+    }
 }
 
-void destroyArrayList(ArrayList list)
-{
-    free(list->array);
-    free(list);
-    printf("ArrayList destroyed.\n");
-}
-
-void append(ArrayList list, int data)
+void append(ArrayList *list, int data)
 {
     if (list->size >= list->capacity)
     {
@@ -40,7 +28,7 @@ void append(ArrayList list, int data)
     list->size++;
 }
 
-int get(const ArrayList list, int index)
+int get(const ArrayList *list, int index)
 {
     if (index >= 0 && index < list->size)
     {
@@ -53,12 +41,12 @@ int get(const ArrayList list, int index)
     }
 }
 
-int getSize(ArrayList list)
+int getSize(const ArrayList *list)
 {
     return list->size;
 }
 
-void display(const ArrayList list)
+void display(const ArrayList *list)
 {
     printf("List: ");
     for (int i = 0; i < list->size; i++)
@@ -66,4 +54,29 @@ void display(const ArrayList list)
         printf("%d ", list->array[i]);
     }
     printf("\n");
+}
+
+ArrayList *createArrayList(int initialCapacity)
+{
+    ArrayList *this = malloc(sizeof(ArrayList));
+    if (this == NULL)
+        return NULL;
+
+    this->array = malloc(initialCapacity * sizeof(int));
+    if (this->array == NULL)
+    {
+        free(this);
+        return NULL;
+    }
+
+    this->size = 0;
+    this->capacity = initialCapacity;
+
+    this->append = &append;
+    this->destroyArrayList = &destroyArrayList;
+    this->display = &display;
+    this->get = &get;
+    this->getSize = &getSize;
+
+    return this;
 }

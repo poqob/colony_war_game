@@ -1,27 +1,26 @@
-#ifndef ARRAY_LIST_H
-#define ARRAY_LIST_H
+#ifndef ARRAYLIST_H
+#define ARRAYLIST_H
 
-struct ARRAYLIST
+typedef struct ArrayList ArrayList;
+
+struct ArrayList
 {
     int *array;
     int size;
     int capacity;
 
-    // struct ARRAYLIST (*createArrayList)(int initialCapacity);
-    void (*destroyArrayList)(struct ARRAYLIST *);
-    void (*append)(struct ARRAYLIST *, int data);
-    int (*get)(struct ARRAYLIST *, int index);
-    int (*getSize)(struct ARRAYLIST *);
-    void (*display)(struct ARRAYLIST *);
+    void (*destroyArrayList)(ArrayList *);
+    void (*append)(ArrayList *, int);
+    int (*get)(const ArrayList *, int);
+    int (*getSize)(const ArrayList *);
+    void (*display)(const ArrayList *);
 };
 
-typedef struct ARRAYLIST *ArrayList;
-
-ArrayList createArrayList(int initialCapacity);
-void destroyArrayList(ArrayList);
-void append(ArrayList, int data);
-int get(const ArrayList, int index);
-int getSize(ArrayList);
-void display(const ArrayList);
+ArrayList *createArrayList(int initialCapacity);
+void destroyArrayListt(ArrayList *list);
+void append(ArrayList *list, int data);
+int get(const ArrayList *list, int index);
+int getSize(const ArrayList *list);
+void display(const ArrayList *list);
 
 #endif
