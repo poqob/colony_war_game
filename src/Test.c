@@ -4,6 +4,9 @@
 #include "../include/utils/ArrayList.h"
 #include "../include/Colony/Colony.h"
 
+// TODO:
+// create game structure to manage the game.
+// complate the Colont structure, add produce, fight modules.
 int main()
 {
     int mock = 23;
@@ -36,8 +39,10 @@ int main()
     // Clean up
     list->destroyArrayList(list);
 
-    // TODO: create colony according to mock data.
+    // TODO: create colony according to mock data. DONE
     Colony *colony = newColony(mock);
+    printf("\ncolony symbol: %c ", colony->symbol);
+    colony->destroyColony(colony);
     printf("no error.");
     return 0;
 }
