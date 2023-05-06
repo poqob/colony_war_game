@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include "../include/utils/ArrayList.h"
 #include "../include/utils/DataType.h"
+#include "../include/utils/ArrayList.h"
+#include "../include/Colony/Colony.h"
 
 int main()
 {
-
+    int mock = 23;
     ArrayList *list = createArrayList(10, INT);
     ArrayList *clist = createArrayList(10, CHAR);
 
@@ -33,5 +35,9 @@ int main()
 
     // Clean up
     list->destroyArrayList(list);
+
+    // TODO: create colony according to mock data.
+    Colony *colony = newColony(mock);
+    printf("no error.");
     return 0;
 }
