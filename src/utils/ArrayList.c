@@ -10,7 +10,7 @@ void destroyArrayList(ArrayList *list)
     {
         free(list->array);
         free(list);
-        printf("ArrayList destroyed.\n");
+        // printf("ArrayList destroyed.\n");
     }
 }
 

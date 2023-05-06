@@ -3,6 +3,9 @@
 
 int main()
 {
+    // TODO: create population structure as oop simulate.
+    // TODO: create populations according to console input (use mock)
+
     ArrayList *list = createArrayList(10);
 
     list->append(list, 10);
