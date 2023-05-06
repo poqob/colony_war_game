@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "../../include/utils/ArrayList.h"
 
 void destroyArrayList(ArrayList *list)
@@ -10,17 +8,15 @@ void destroyArrayList(ArrayList *list)
     {
         free(list->array);
         free(list);
-        // printf("ArrayList destroyed.\n");
     }
 }
 
-void append(ArrayList *list, int data)
+void append(ArrayList *list, void *data)
 {
     if (list->size >= list->capacity)
     {
-        // Resize the array if it's full
         int newCapacity = list->capacity * 2;
-        list->array = (int *)realloc(list->array, newCapacity * sizeof(int));
+        list->array = (void **)realloc(list->array, newCapacity * sizeof(void *));
         list->capacity = newCapacity;
     }
 
@@ -28,7 +24,7 @@ void append(ArrayList *list, int data)
     list->size++;
 }
 
-int get(const ArrayList *list, int index)
+void *get(const ArrayList *list, int index)
 {
     if (index >= 0 && index < list->size)
     {
@@ -37,7 +33,7 @@ int get(const ArrayList *list, int index)
     else
     {
         printf("Error: Index out of bounds!\n");
-        return -1; // Return an error value or handle the error as desired
+        return NULL;
     }
 }
 
@@ -48,21 +44,32 @@ int getSize(const ArrayList *list)
 
 void display(const ArrayList *list)
 {
+
     printf("List: ");
     for (int i = 0; i < list->size; i++)
     {
-        printf("%d ", list->array[i]);
+        void *data = list->array[i];
+
+        if (data == NULL)
+            printf("NULL ");
+        else if (list->dataType == INT)
+            printf("%d ", *(int *)data);
+        else if (list->dataType == CHAR)
+            printf("%c ", *(char *)data);
     }
     printf("\n");
 }
 
-ArrayList *createArrayList(int initialCapacity)
+ArrayList *createArrayList(int initialCapacity, DataType type)
 {
+
     ArrayList *this = malloc(sizeof(ArrayList));
     if (this == NULL)
         return NULL;
 
-    this->array = malloc(initialCapacity * sizeof(int));
+    this->dataType = type;
+
+    this->array = malloc(initialCapacity * sizeof(this->dataType));
     if (this->array == NULL)
     {
         free(this);

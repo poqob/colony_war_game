@@ -1,22 +1,26 @@
 #include <stdio.h>
 #include "../include/utils/ArrayList.h"
+#include "../include/utils/DataType.h"
 
 int main()
 {
-    // TODO: create population structure as oop simulate.
-    // TODO: create populations according to console input (use mock)
 
-    ArrayList *list = createArrayList(10);
+    ArrayList *list = createArrayList(10, INT);
 
-    list->append(list, 10);
-    list->append(list, 20);
-    list->append(list, 30);
+    // Append integer elements
+    int a = 1, b = 2, c = 3;
+    list->append(list, &a);
+    list->append(list, &b);
+    list->append(list, &c);
 
-    int firstElement = list->get(list, 0);
-    int listSize = list->getSize(list);
+    // Get an element
+    int *element = (int *)list->get(list, 2);
+    printf("Element at index 2: %d\n", *element);
 
+    // Display the list
     list->display(list);
-    list->destroyArrayList(list);
 
+    // Clean up
+    list->destroyArrayList(list);
     return 0;
 }
