@@ -16,6 +16,10 @@ struct Colony
 
     // functions
     void (*destroyColony)(Colony *);
+
+    // abbstract methods (simulation)
+    void (*fight)();
+    void (*produce)();
 };
 
 Colony *newColony(int population);

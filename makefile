@@ -5,9 +5,13 @@ compile:
 	gcc -I ./include/utils -o ./lib/Bool.o -c ./src/utils/Bool.c
 	gcc -I ./include/utils -o ./lib/DataType.o -c ./src/utils/DataType.c
 
+	gcc -I ./include/strategy -o ./lib/AStrategy.o -c ./src/strategy/AStrategy.c
+	gcc -I ./include/strategy -o ./lib/Strategy0.o -c ./src/strategy/Strategy0.c
+
+
 	gcc -I ./include/colony -o ./lib/Colony.o -c ./src/colony/Colony.c
 
-	gcc -I ./include -o ./bin/Test ./lib/ArrayList.o ./lib/Bool.o ./lib/DataType.o ./lib/Colony.o ./src/Test.c
+	gcc -I ./include -o ./bin/Test ./lib/ArrayList.o ./lib/Bool.o ./lib/DataType.o ./lib/AStrategy.o ./lib/Strategy0.o ./lib/Colony.o ./src/Test.c
 
 run:
 	./bin/Test

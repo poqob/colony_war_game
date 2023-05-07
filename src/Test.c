@@ -3,10 +3,11 @@
 #include "../include/utils/DataType.h"
 #include "../include/utils/ArrayList.h"
 #include "../include/Colony/Colony.h"
+#include "../include/strategy/Strategy0.h"
 
 // TODO:
 // create game structure to manage the game.
-// complate the Colont structure, add produce, fight modules.
+// complate the Colony structure, add produce, fight modules.
 int main()
 {
     int mock = 23;
@@ -43,6 +44,13 @@ int main()
     Colony *colony = newColony(mock);
     printf("\ncolony symbol: %c ", colony->symbol);
     colony->destroyColony(colony);
+
+    // strategy test
+    Strategy0 *strategy = newStrategy0();
+    int f = strategy->fight();
+    printf("\n  %d \n", f);
+    strategy->destroy(strategy);
     printf("no error.");
+
     return 0;
 }
