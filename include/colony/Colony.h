@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../utils/Bool.h"
+#include "../strategy/StrategiesE.h"
+#include "../strategy/Strategy0.h"
 
 typedef struct Colony Colony;
 
@@ -13,16 +15,18 @@ struct Colony
     int population;
     boolean amIALive;
     char symbol; // char code 1-21
+    void *strategy;
+    enum StrategiesE strategyType; // keeps which strategy picked.
 
     // functions
     void (*destroyColony)(Colony *);
-
-    // abbstract methods (simulation)
-    void (*fight)();
+    void (*fight)(Colony *, Colony *);
+    // TODO: Produce
     void (*produce)();
 };
 
 Colony *newColony(int population);
 void destroyColony(Colony *colony);
+void colonyFight(Colony *colony0, Colony *colony1);
 
 #endif // COLONY
