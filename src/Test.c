@@ -3,7 +3,6 @@
 #include "../include/utils/DataType.h"
 #include "../include/utils/ArrayList.h"
 #include "../include/Colony/Colony.h"
-#include "../include/strategy/Strategy0.h"
 
 // TODO:
 // create game structure to manage the game.
@@ -45,11 +44,7 @@ int main()
     printf("\ncolony symbol: %c ", colony->symbol);
     colony->destroyColony(colony);
 
-    // strategy test
-    Strategy0 *strategy = newStrategy0();
-    int f = strategy->fight();
-    printf("\n  %d \n", f);
-    strategy->destroy(strategy);
+  
     printf("no error.");
 
     return 0;

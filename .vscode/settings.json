@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "arraylist.h": "c"
+        "arraylist.h": "c",
+        "strategy0.h": "c",
+        "colony.h": "c"
     }
 }

@@ -5,6 +5,7 @@ typedef struct Strategy0 Strategy0;
 
 struct Strategy0
 {
+ 
     AStrategy *super;
     void (*destroy)(Strategy0 *);
     int (*fight)();
