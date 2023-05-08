@@ -70,6 +70,8 @@ int main(int argc, char *argv[])
     populations->append(populations, &p);
     Game *game = newGame(populations);
     game->play(game);
+    printf("\ntotal war count: %d\n", game->totalWarCount);
+
     game->destroy(game);
 
     printf("\nno error.");

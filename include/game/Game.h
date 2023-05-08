@@ -10,6 +10,8 @@ typedef struct Game Game;
 struct Game
 {
     ArrayList *colonies;
+    int totalWarCount;
+    int tour;
     void (*report)(Game *);
     void (*destroy)(Game *);
     void (*play)(Game *);
