@@ -24,7 +24,7 @@ void colonyFight(ArrayList *colonies)
     int i;
     for (i = 0; i < colonies->size; i++)
     {
-        printf("%d ", ((Colony *)colonies->get(colonies, i))->population);
+        printf("%d ", ((Colony *)colonies->get(colonies, i))->fightPower);
     }
 
     INDEX;

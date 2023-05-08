@@ -122,11 +122,11 @@ Colony *newColony(int population)
     this->symbol = population % 21; // in ascii symbols defined between 1-21
     this->foodStock = population * population;
 
-    this->fightPower = getFightPower(this);
-
     this->strategy = pickStrategy(this); // attempt strategy and strategy type.
 
     this->manufacture = pickManufacture(this); // attempt manufacture and manufacture type.
+
+    this->fightPower = getFightPower(this);
 
     this->destroyColony = &destroyColony;
 }

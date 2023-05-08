@@ -16,8 +16,8 @@ Strategy2 *newStrategy2()
 
 int fightStrategy2()
 {
-    srand(time(NULL));    // Seed the random number generator with the current time
-    return rand() % 1001; // Generate a random number between 0 and 1000
+    srand(time(NULL)); // Seed the random number generator with the current time
+    return 900;        // rand() % 1001; // Generate a random number between 0 and 1000
 }
 
 void destroyStrategy2(Strategy2 *strategy)
