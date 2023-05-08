@@ -2,10 +2,10 @@
 
 AManufacture *newAManufacture()
 {
-    AManufacture *this;
-    this->destroy = destroyAManufacture;
+    AManufacture *this = (AManufacture *)malloc(sizeof(AManufacture));
+    this->destroy = &destroyAManufacture;
 }
-void *destroyAManufacture(AManufacture *this)
+void destroyAManufacture(AManufacture *this)
 {
     free(this);
 }

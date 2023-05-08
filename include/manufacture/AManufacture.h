@@ -1,6 +1,6 @@
 #if !defined(AMANUFACTURE)
 #define AMANUFACTURE
-
+#include <stdlib.h>
 typedef struct AManufacture AManufacture;
 
 struct AManufacture
@@ -10,6 +10,6 @@ struct AManufacture
 };
 
 AManufacture *newAManufacture();
-void *destroyAManufacture();
+void destroyAManufacture();
 
 #endif // AMANUFACTURE
