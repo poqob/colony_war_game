@@ -22,20 +22,19 @@ struct Colony
     int population;
     boolean amIALive;
     char symbol; // char code 1-21
+
     void *strategy;
-    enum Strategies strategyType; // stores which strategy picked.
+    enum Strategies strategyType; // stores which strategy struct picked.
 
     void *manufacture;
-    enum Manufactures manufactureType;
+    enum Manufactures manufactureType; // stores which manufacture struct picked.
     // functions
     void (*destroyColony)(Colony *);
-    void (*fight)(Colony *, Colony *);
-    // TODO: Produce
-    void (*produce)();
+
+    int fightPower;
 };
 
 Colony *newColony(int population);
 void destroyColony(Colony *colony);
-void colonyFight(Colony *colony0, Colony *colony1);
 
 #endif // COLONY

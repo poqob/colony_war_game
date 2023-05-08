@@ -3,7 +3,25 @@
 // TODO:
 // toString() method will be added.
 
-// it creates propper strategy according to population count and attempts strategy type to colony.
+// local function --private
+int getFightPower(Colony *colony)
+{
+    // dedect colony's strategy type and get fight power from the strategy.
+    switch (colony->strategyType)
+    {
+    case strategy0:
+        return ((Strategy0 *)colony->strategy)->fight();
+    case strategy1:
+        return ((Strategy1 *)colony->strategy)->fight();
+    case strategy2:
+        return ((Strategy2 *)colony->strategy)->fight();
+    default:
+        break;
+    }
+}
+
+// local function --private
+//  it creates propper strategy according to population count and attempts strategy type to colony.
 void *pickStrategy(Colony *colony)
 {
     enum Strategies strategy = colony->population % 3; // 0-1-2 , 0= strategy0 ,1= st"1, 2= st"2
@@ -29,6 +47,7 @@ void *pickStrategy(Colony *colony)
     }
 }
 
+// local function --private
 void *pickManufacture(Colony *colony)
 {
     enum Manufactures manufacture = colony->population % 3; // 0-1-2, 0= manufacture0 ...
@@ -50,54 +69,7 @@ void *pickManufacture(Colony *colony)
     }
 };
 
-Colony *newColony(int population)
-{
-    // allocate
-    Colony *this = malloc(sizeof(Colony));
-    if (this == NULL)
-        return NULL;
-
-    // attempt fields
-    this->amIALive = true;
-    this->population = population;
-    this->symbol = population % 21; // in ascii symbols defined between 1-21
-    this->foodStock = population * population;
-
-    this->strategy = pickStrategy(this); // attempt strategy and strategy type.
-
-    this->manufacture = pickManufacture(this);
-
-    this->destroyColony = &destroyColony;
-
-    this->fight = &colonyFight;
-}
-
-int getFightPower(Colony *colony)
-{
-    // dedect colony's strategy type and get fight power.
-    switch (colony->strategyType)
-    {
-    case strategy0:
-        return ((Strategy0 *)colony->strategy)->fight();
-    case strategy1:
-        return ((Strategy1 *)colony->strategy)->fight();
-    case strategy2:
-        return ((Strategy2 *)colony->strategy)->fight();
-    default:
-        break;
-    }
-}
-
-void colonyFight(Colony *colony0, Colony *colony1)
-{
-    int c0FightPower = getFightPower(colony0);
-    int c1FightPower = getFightPower(colony1);
-
-    // fight algorithm.
-
-    INDEX;
-}
-
+// local function --private
 void destroyStrategy(Colony *colony)
 {
     // destroy strategy
@@ -117,6 +89,7 @@ void destroyStrategy(Colony *colony)
     }
 }
 
+// local function --private
 void destroyManufacture(Colony *colony)
 {
     // destroy manufacture
@@ -134,6 +107,28 @@ void destroyManufacture(Colony *colony)
     default:
         break;
     }
+}
+
+Colony *newColony(int population)
+{
+    // allocate
+    Colony *this = malloc(sizeof(Colony));
+    if (this == NULL)
+        return NULL;
+
+    // attempt fields
+    this->amIALive = true;
+    this->population = population;
+    this->symbol = population % 21; // in ascii symbols defined between 1-21
+    this->foodStock = population * population;
+
+    this->fightPower = getFightPower(this);
+
+    this->strategy = pickStrategy(this); // attempt strategy and strategy type.
+
+    this->manufacture = pickManufacture(this); // attempt manufacture and manufacture type.
+
+    this->destroyColony = &destroyColony;
 }
 
 void destroyColony(Colony *this)
