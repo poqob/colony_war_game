@@ -6,6 +6,7 @@
 #include "../utils/Bool.h"
 #include "../strategy/StrategiesE.h"
 #include "../strategy/Strategy0.h"
+#include "../strategy/Strategy1.h"
 
 typedef struct Colony Colony;
 

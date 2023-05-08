@@ -20,7 +20,7 @@ void *pickStrategy(Colony *colony)
     case strategy1:
         colony->strategyType = strategy1;
 
-        return newStrategy0();
+        return newStrategy1();
     case strategy2:
         colony->strategyType = strategy2;
 
@@ -63,10 +63,10 @@ void colonyFight(Colony *colony0, Colony *colony1)
     {
     case strategy0:
         c0FightPower = ((Strategy0 *)colony0->strategy)->fight();
+        break;
+    case strategy1:
+        c0FightPower = ((Strategy1 *)colony0->strategy)->fight();
         break; /*
-     case strategy1:
-         ((Strategy1 *)colony->strategy)->destroy((Strategy1 *)colony->strategy);
-         break;
      case strategy2:
          ((Strategy2 *)colony->strategy)->destroy((Strategy2 *)colony->strategy);
          break;*/
