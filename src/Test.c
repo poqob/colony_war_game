@@ -3,11 +3,13 @@
 #include "../include/utils/DataType.h"
 #include "../include/utils/ArrayList.h"
 #include "../include/Colony/Colony.h"
+#include "../include/utils/String.h"
+#include "../include/game/Game.h"
 
 // TODO:
 // create game structure to manage the game.
 // complate the Colony structure, add produce, fight modules.
-int main()
+int main(int argc, char *argv[])
 {
     int mock = 23;
     ArrayList *list = createArrayList(10, INT);
@@ -44,8 +46,28 @@ int main()
     printf("\ncolony symbol: %c ", colony->symbol);
     colony->destroyColony(colony);
 
-  
-    printf("no error.");
+    String *myStr = newString("zort");
+    printf("%s\n", myStr->str);
+    printf("Length: %d\n", myStr->len);
+    printf("Size: %d\n", myStr->getSize(myStr));
+    destroyString(myStr);
+
+    printf("\n");
+
+    // console argument test
+    int i;
+
+    for (i = 0; i < argc; i++)
+    {
+        int zz = atoi(argv[i]);
+        printf("arg %d: %d\n", i, zz);
+    }
+    ArrayList *populations = createArrayList(4, INT);
+    populations->append(populations, &a);
+    populations->append(populations, &b);
+    Game *game = newGame(populations);
+
+    printf("\nno error.");
 
     return 0;
 }

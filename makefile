@@ -12,7 +12,9 @@ compile:
 
 	gcc -I ./include/colony -o ./lib/Colony.o -c ./src/colony/Colony.c
 
-	gcc -I ./include -o ./bin/Test ./lib/ArrayList.o ./lib/Bool.o ./lib/DataType.o ./lib/String.o ./lib/AStrategy.o ./lib/Strategy0.o ./lib/Colony.o ./src/Test.c
+	gcc -I ./include/game -o ./lib/Game.o -c ./src/game/Game.c
+
+	gcc -I ./include -o ./bin/Test ./lib/ArrayList.o ./lib/Bool.o ./lib/DataType.o ./lib/String.o ./lib/AStrategy.o ./lib/Strategy0.o ./lib/Colony.o ./lib/Game.o ./src/Test.c
 
 run:
-	./bin/Test
+	./bin/Test 13 24

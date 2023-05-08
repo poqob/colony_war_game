@@ -2,6 +2,8 @@
     "files.associations": {
         "arraylist.h": "c",
         "strategy0.h": "c",
-        "colony.h": "c"
+        "colony.h": "c",
+        "stdlib.h": "c",
+        "string.h": "c"
     }
 }
