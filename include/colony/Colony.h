@@ -1,5 +1,6 @@
 #if !defined(COLONY)
 #define COLONY
+#define INDEX 1000
 #include <stdio.h>
 #include <stdlib.h>
 #include "../utils/Bool.h"
@@ -16,7 +17,7 @@ struct Colony
     boolean amIALive;
     char symbol; // char code 1-21
     void *strategy;
-    enum StrategiesE strategyType; // keeps which strategy picked.
+    enum StrategiesE strategyType; // stores which strategy picked.
 
     // functions
     void (*destroyColony)(Colony *);

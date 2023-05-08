@@ -53,6 +53,8 @@ Colony *newColony(int population)
 
 void colonyFight(Colony *colony0, Colony *colony1)
 {
+    int c0FightPower;
+    int c1FightPower;
     // TODO: change destroys to strategy value.
     // TODO: code the fight alghorithm under switchs.
 
@@ -60,7 +62,7 @@ void colonyFight(Colony *colony0, Colony *colony1)
     switch (colony0->strategyType)
     {
     case strategy0:
-        ((Strategy0 *)colony0->strategy)->destroy((Strategy0 *)colony0->strategy);
+        c0FightPower = ((Strategy0 *)colony0->strategy)->fight();
         break; /*
      case strategy1:
          ((Strategy1 *)colony->strategy)->destroy((Strategy1 *)colony->strategy);
@@ -69,7 +71,8 @@ void colonyFight(Colony *colony0, Colony *colony1)
          ((Strategy2 *)colony->strategy)->destroy((Strategy2 *)colony->strategy);
          break;*/
     default:
-        ((Strategy0 *)colony0->strategy)->destroy((Strategy0 *)colony0->strategy); // TODO: Delete this line after other strategies added.
+        c0FightPower = ((Strategy0 *)colony0->strategy)->fight(); // TODO: Delete this line after other strategies added.
+
         break;
     }
 
@@ -77,7 +80,7 @@ void colonyFight(Colony *colony0, Colony *colony1)
     switch (colony1->strategyType)
     {
     case strategy0:
-        ((Strategy0 *)colony1->strategy)->destroy((Strategy0 *)colony1->strategy);
+        c1FightPower = ((Strategy0 *)colony1->strategy)->fight();
         break; /*
      case strategy1:
          ((Strategy1 *)colony->strategy)->destroy((Strategy1 *)colony->strategy);
@@ -86,11 +89,13 @@ void colonyFight(Colony *colony0, Colony *colony1)
          ((Strategy2 *)colony->strategy)->destroy((Strategy2 *)colony->strategy);
          break;*/
     default:
-        ((Strategy0 *)colony1->strategy)->destroy((Strategy0 *)colony1->strategy); // TODO: Delete this line after other strategies added.
+        c1FightPower = ((Strategy0 *)colony1->strategy)->fight(); // TODO: Delete this line after other strategies added.
         break;
     }
 
     // fight algorithm.
+
+    INDEX;
 }
 
 void destroyColony(Colony *colony)
