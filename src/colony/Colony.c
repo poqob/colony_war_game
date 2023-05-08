@@ -1,14 +1,12 @@
 
 #include "../../include/colony/Colony.h"
 // TODO:
-//  produce() method will be added.
 // toString() method will be added.
 
 // it creates propper strategy according to population count and attempts strategy type to colony.
 void *pickStrategy(Colony *colony)
 {
-    void *st;
-    enum StrategiesE strategy = colony->population % 3; // 0-1-2 , 0= strategy0 ,1= st"1, 2= st"2
+    enum Strategies strategy = colony->population % 3; // 0-1-2 , 0= strategy0 ,1= st"1, 2= st"2
 
     // TODO: edit 1-2 situations constructors.
     switch (strategy)
@@ -24,16 +22,37 @@ void *pickStrategy(Colony *colony)
     case strategy2:
         colony->strategyType = strategy2;
 
-        return newStrategy0();
+        return newStrategy2();
 
     default:
         break;
     }
 }
 
+void *pickManufacture(Colony *colony)
+{
+    enum Manufactures manufacture = colony->population % 3; // 0-1-2, 0= manufacture0 ...
+
+    switch (manufacture)
+    {
+    case manufacture0:
+        colony->manufactureType = manufacture0;
+        return newManufacture0();
+
+    case manufacture1:
+        colony->manufactureType = manufacture1;
+        return newManufacture1();
+    case manufacture2:
+        colony->manufactureType = manufacture2;
+        return newManufacture2();
+    default:
+        break;
+    }
+};
+
 Colony *newColony(int population)
 {
-    // take location in ram
+    // allocate
     Colony *this = malloc(sizeof(Colony));
     if (this == NULL)
         return NULL;
@@ -46,79 +65,80 @@ Colony *newColony(int population)
 
     this->strategy = pickStrategy(this); // attempt strategy and strategy type.
 
-    this->manufacture = newManufacture0();
+    this->manufacture = pickManufacture(this);
 
     this->destroyColony = &destroyColony;
 
     this->fight = &colonyFight;
 }
 
+int getFightPower(Colony *colony)
+{
+    // dedect colony's strategy type and get fight power.
+    switch (colony->strategyType)
+    {
+    case strategy0:
+        return ((Strategy0 *)colony->strategy)->fight();
+    case strategy1:
+        return ((Strategy1 *)colony->strategy)->fight();
+    case strategy2:
+        return ((Strategy2 *)colony->strategy)->fight();
+    default:
+        break;
+    }
+}
+
 void colonyFight(Colony *colony0, Colony *colony1)
 {
-    int c0FightPower;
-    int c1FightPower;
-    // TODO: change destroys to strategy value.
-    // TODO: code the fight alghorithm under switchs.
-
-    // dedecting colony0's strategy
-    switch (colony0->strategyType)
-    {
-    case strategy0:
-        c0FightPower = ((Strategy0 *)colony0->strategy)->fight();
-        break;
-    case strategy1:
-        c0FightPower = ((Strategy1 *)colony0->strategy)->fight();
-        break; /*
-     case strategy2:
-         ((Strategy2 *)colony->strategy)->destroy((Strategy2 *)colony->strategy);
-         break;*/
-    default:
-        c0FightPower = ((Strategy0 *)colony0->strategy)->fight(); // TODO: Delete this line after other strategies added.
-
-        break;
-    }
-
-    // dedecting colony1's strategy
-    switch (colony1->strategyType)
-    {
-    case strategy0:
-        c1FightPower = ((Strategy0 *)colony1->strategy)->fight();
-        break; /*
-     case strategy1:
-         ((Strategy1 *)colony->strategy)->destroy((Strategy1 *)colony->strategy);
-         break;
-     case strategy2:
-         ((Strategy2 *)colony->strategy)->destroy((Strategy2 *)colony->strategy);
-         break;*/
-    default:
-        c1FightPower = ((Strategy0 *)colony1->strategy)->fight(); // TODO: Delete this line after other strategies added.
-        break;
-    }
+    int c0FightPower = getFightPower(colony0);
+    int c1FightPower = getFightPower(colony1);
 
     // fight algorithm.
 
     INDEX;
 }
 
-void destroyColony(Colony *colony)
+void destroyStrategy(Colony *colony)
 {
     // destroy strategy
-    colony->manufacture->destroy(colony->manufacture);
     switch (colony->strategyType)
     {
     case strategy0:
         ((Strategy0 *)colony->strategy)->destroy((Strategy0 *)colony->strategy);
-        break; /*
-     case strategy1:
-         ((Strategy1 *)colony->strategy)->destroy((Strategy1 *)colony->strategy);
-         break;
-     case strategy2:
-         ((Strategy2 *)colony->strategy)->destroy((Strategy2 *)colony->strategy);
-         break;*/
+        break;
+    case strategy1:
+        ((Strategy1 *)colony->strategy)->destroy((Strategy1 *)colony->strategy);
+        break;
+    case strategy2:
+        ((Strategy2 *)colony->strategy)->destroy((Strategy2 *)colony->strategy);
+        break;
     default:
-        ((Strategy0 *)colony->strategy)->destroy((Strategy0 *)colony->strategy); // TODO: Delete this line after other strategies added.
         break;
     }
+}
 
-    free(colony);
+void destroyManufacture(Colony *colony)
+{
+    // destroy manufacture
+    switch (colony->manufactureType)
+    {
+    case manufacture0:
+        ((Manufacture0 *)colony->manufacture)->destroy((Manufacture0 *)colony->manufacture);
+        break;
+    case manufacture1:
+        ((Manufacture1 *)colony->manufacture)->destroy((Manufacture1 *)colony->manufacture);
+        break;
+    case manufacture2:
+        ((Manufacture2 *)colony->manufacture)->destroy((Manufacture2 *)colony->manufacture);
+        break;
+    default:
+        break;
+    }
+}
+
+void destroyColony(Colony *this)
+{
+    destroyStrategy(this);
+    destroyManufacture(this);
+    free(this);
 }

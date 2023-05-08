@@ -4,6 +4,9 @@
         "strategy0.h": "c",
         "colony.h": "c",
         "stdlib.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "strategy1.h": "c",
+        "manufacture0.h": "c",
+        "manufactures.h": "c"
     }
 }

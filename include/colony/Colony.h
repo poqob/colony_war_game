@@ -4,10 +4,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../utils/Bool.h"
-#include "../strategy/StrategiesE.h"
+#include "../strategy/Strategies.h"
 #include "../strategy/Strategy0.h"
 #include "../strategy/Strategy1.h"
+#include "../strategy/Strategy2.h"
+#include "../manufacture/Manufactures.h"
 #include "../manufacture/Manufacture0.h"
+#include "../manufacture/Manufacture1.h"
+#include "../manufacture/Manufacture2.h"
 
 typedef struct Colony Colony;
 
@@ -19,9 +23,10 @@ struct Colony
     boolean amIALive;
     char symbol; // char code 1-21
     void *strategy;
-    enum StrategiesE strategyType; // stores which strategy picked.
+    enum Strategies strategyType; // stores which strategy picked.
 
-    Manufacture0 *manufacture;
+    void *manufacture;
+    enum Manufactures manufactureType;
     // functions
     void (*destroyColony)(Colony *);
     void (*fight)(Colony *, Colony *);
