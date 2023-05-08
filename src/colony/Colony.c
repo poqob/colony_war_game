@@ -46,6 +46,8 @@ Colony *newColony(int population)
 
     this->strategy = pickStrategy(this); // attempt strategy and strategy type.
 
+    this->manufacture = newManufacture0();
+
     this->destroyColony = &destroyColony;
 
     this->fight = &colonyFight;
@@ -101,7 +103,7 @@ void colonyFight(Colony *colony0, Colony *colony1)
 void destroyColony(Colony *colony)
 {
     // destroy strategy
-
+    colony->manufacture->destroy(colony->manufacture);
     switch (colony->strategyType)
     {
     case strategy0:

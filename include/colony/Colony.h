@@ -7,6 +7,7 @@
 #include "../strategy/StrategiesE.h"
 #include "../strategy/Strategy0.h"
 #include "../strategy/Strategy1.h"
+#include "../manufacture/Manufacture0.h"
 
 typedef struct Colony Colony;
 
@@ -20,6 +21,7 @@ struct Colony
     void *strategy;
     enum StrategiesE strategyType; // stores which strategy picked.
 
+    Manufacture0 *manufacture;
     // functions
     void (*destroyColony)(Colony *);
     void (*fight)(Colony *, Colony *);
