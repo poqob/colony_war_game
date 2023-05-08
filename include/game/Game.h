@@ -10,16 +10,14 @@ typedef struct Game Game;
 struct Game
 {
     ArrayList *colonies;
-    void (*createColonies)(ArrayList *, Game *);
-    void (*turn)(ArrayList *);
-    void (*report)(ArrayList *);
+    void (*report)(Game *);
     void (*destroy)(Game *);
+    void (*play)(Game *);
 };
 
 Game *newGame(ArrayList *populations);
-void createPlayers(ArrayList *populations, Game *this);
 void destroyGame(Game *game);
-void gameTurn(ArrayList *colonies);
-void gameReport(ArrayList *colonies);
+void gameReport(Game *game);
+void gamePlay(Game *game);
 
 #endif // GAME

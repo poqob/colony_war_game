@@ -7,6 +7,7 @@
         "string.h": "c",
         "strategy1.h": "c",
         "manufacture0.h": "c",
-        "manufactures.h": "c"
+        "manufactures.h": "c",
+        "manufacture1.h": "c"
     }
 }

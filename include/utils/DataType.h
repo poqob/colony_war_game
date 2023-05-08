@@ -7,7 +7,7 @@ typedef enum
 {
     CHAR = 1,
     INT = 4,
-    COLONYY = COLONY_SIZE
+    _COLONY = COLONY_SIZE
 } DataType;
 
 #endif // DATATYPES

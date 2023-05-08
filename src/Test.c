@@ -62,10 +62,14 @@ int main(int argc, char *argv[])
         int zz = atoi(argv[i]);
         printf("arg %d: %d\n", i, zz);
     }
+
+    int q = 21;
+    int p = 34;
     ArrayList *populations = createArrayList(4, INT);
-    populations->append(populations, &a);
-    populations->append(populations, &b);
+    populations->append(populations, &q);
+    populations->append(populations, &p);
     Game *game = newGame(populations);
+    game->play(game);
     game->destroy(game);
 
     printf("\nno error.");
