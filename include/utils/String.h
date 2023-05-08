@@ -7,9 +7,10 @@ struct String
     char *str;
     int len;
     void (*destroy)(String *string);
+    int (*getSize)(String *string);
 };
 
 String *newString(char *s);
 void destroyString(String *str);
-
+int getStringSize(String *str);
 #endif // STRING
