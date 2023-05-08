@@ -20,6 +20,21 @@ int getFightPower(Colony *colony)
     }
 }
 
+int getManufacturePower(Colony *colony)
+{
+    switch (colony->manufactureType)
+    {
+    case manufacture0:
+        return ((Manufacture0 *)colony->manufacture)->produce;
+    case manufacture1:
+        return ((Manufacture1 *)colony->manufacture)->produce;
+    case manufacture2:
+        return ((Manufacture2 *)colony->manufacture)->produce;
+    default:
+        break;
+    }
+}
+
 // local function --private
 //  it creates propper strategy according to population count and attempts strategy type to colony.
 void *pickStrategy(Colony *colony)
@@ -127,6 +142,8 @@ Colony *newColony(int population)
     this->manufacture = pickManufacture(this); // attempt manufacture and manufacture type.
 
     this->fightPower = getFightPower(this);
+
+    this->manufacturePower = getManufacturePower(this);
 
     this->destroyColony = &destroyColony;
 }

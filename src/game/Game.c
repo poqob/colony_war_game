@@ -20,11 +20,12 @@ void createPlayers(ArrayList *populations, Game *this)
 // TODO: to complate
 void colonyFight(ArrayList *colonies)
 {
-
+    Colony *colony;
     int i;
     for (i = 0; i < colonies->size; i++)
     {
-        printf("%d ", ((Colony *)colonies->get(colonies, i))->fightPower);
+        colony = ((Colony *)colonies->get(colonies, i));
+        printf("%d ", colony->fightPower);
     }
 
     INDEX;

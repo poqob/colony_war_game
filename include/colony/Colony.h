@@ -32,6 +32,7 @@ struct Colony
     void (*destroyColony)(Colony *);
 
     int fightPower;
+    int manufacturePower;
 };
 
 Colony *newColony(int population);
