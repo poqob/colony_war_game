@@ -1,4 +1,4 @@
-enum StrategiesE
+enum Strategies
 {
     strategy0 = 0,
     strategy1,

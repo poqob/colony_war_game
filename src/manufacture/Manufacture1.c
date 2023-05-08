@@ -6,11 +6,12 @@ Manufacture1 *newManufacture1()
     this->super = newAManufacture();
     this->destroy = &destroyManufacture1;
     this->super->produce = &produceManufacture1;
+    this->produce = this->super->produce;
 }
 void destroyManufacture1(Manufacture1 *this)
 {
     this->super->destroy(this->super);
-    this->destroy(this);
+    free(this);
 };
 int produceManufacture1()
 {

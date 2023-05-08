@@ -11,6 +11,6 @@ struct Manufacture0
 };
 
 Manufacture0 *newManufacture0();
-void destroyManufacture0(Manufacture0 *this);
+void destroyManufacture0(Manufacture0 *);
 int produceManufacture0();
 #endif // MANUFACTURE0
