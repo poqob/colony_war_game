@@ -8,16 +8,20 @@ void createPlayers(ArrayList *populations, Game *this)
     int i;
     for (i = 0; i < populations->size; i++)
     {
-        // colony = newColony(populations[i]);
-        printf("\n%d.", *(int *)populations->get(populations, i));
+        colony = newColony(*(int *)populations->get(populations, i));
+        players->append(players, colony);
     }
-    printf("\n");
-    populations->display(populations);
+    // printf("\ncoloies size: %d", players->size);
+    this->colonies = players;
 }
-void destroyGame(Game *game){};
 void gameTurn(ArrayList *colonies){};
 void gameReport(ArrayList *colonies){};
 
+void destroyGame(Game *this)
+{
+    this->colonies->destroyArrayList(this->colonies);
+    free(this);
+};
 Game *newGame(ArrayList *populations)
 {
     // popoulations array list stores intager values
@@ -27,4 +31,5 @@ Game *newGame(ArrayList *populations)
     this->turn = &gameTurn;
     this->report = &gameReport;
     createPlayers(populations, this);
+    // printf("\ncoloies size: %d", this->colonies->size);
 }

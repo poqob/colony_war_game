@@ -66,6 +66,7 @@ int main(int argc, char *argv[])
     populations->append(populations, &a);
     populations->append(populations, &b);
     Game *game = newGame(populations);
+    game->destroy(game);
 
     printf("\nno error.");
 
