@@ -25,11 +25,11 @@ int getManufacturePower(Colony *colony)
     switch (colony->manufactureType)
     {
     case manufacture0:
-        return ((Manufacture0 *)colony->manufacture)->produce;
+        return ((Manufacture0 *)colony->manufacture)->produce();
     case manufacture1:
-        return ((Manufacture1 *)colony->manufacture)->produce;
+        return ((Manufacture1 *)colony->manufacture)->produce();
     case manufacture2:
-        return ((Manufacture2 *)colony->manufacture)->produce;
+        return ((Manufacture2 *)colony->manufacture)->produce();
     default:
         break;
     }
