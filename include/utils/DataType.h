@@ -3,11 +3,13 @@
 #include "../colony/Colony.h"
 
 #define COLONY_SIZE sizeof(Colony)
+#define CHAR_SIZE sizeof(char)
+#define INT_SIZE sizeof(int)
 typedef enum
 {
-    CHAR = 1,
-    INT = 4,
+    CHAR = CHAR_SIZE,
+    INT = INT_SIZE,
     _COLONY = COLONY_SIZE
 } DataType;
-
+extern const char *DataTypeStrings[];
 #endif // DATATYPES
