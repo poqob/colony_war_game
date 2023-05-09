@@ -15,6 +15,7 @@ String *newString(char *s)
     str->getSize = &getStringSize;
     str->appendStr = &appendString;
     str->appendInt = &appendIntager;
+    str->appendChar = &appendCharacterArray;
     return str;
 }
 
@@ -31,20 +32,23 @@ int getStringSize(String *str)
 
 void appendString(String *this, String *str)
 {
-    this->len += strlen(str->str);
-    strcat(this->str, str->str);
+    this->len += strlen(str->str) + 1;         // update lenght of string
+    this->str = realloc(this->str, this->len); // realloc memory because we gonna add new characters to our array
+    strcat(this->str, str->str);               // add new characters.
 }
 
 void appendIntager(String *this, int val)
 {
-    char str[10]; // intager ,Number of digits
-    sprintf(str, "%d", val);
-    this->len += strlen(str);
-    strcat(this->str, str);
+    char str[10];                              // intager ,Number of digits
+    sprintf(str, "%d", val);                   // attempt int value to str as char array
+    this->len += strlen(str) + 1;              // update lenght of string
+    this->str = realloc(this->str, this->len); // realloc memory because we gonna add new characters to our array
+    strcat(this->str, str);                    // add new characters.
 }
 
 void appendCharacterArray(String *this, char *val)
 {
-    this->len += strlen(val);
-    strcat(this->str, val);
+    this->len += strlen(val) + 1;              // update lenght of string
+    this->str = realloc(this->str, this->len); // realloc memory because we gonna add new characters to our array
+    strcat(this->str, val);                    // add new characters.
 }
