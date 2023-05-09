@@ -135,7 +135,7 @@ Colony *newColony(int population)
     // attempt fields
     this->amIALive = true;
     this->population = population;
-    this->symbol = population % 21; // in ascii symbols defined between 1-21
+    this->symbol = population % 31; // in ascii symbols defined between 1-31
     this->foodStock = population * population;
     this->victory = 0;
     this->loose = 0;
