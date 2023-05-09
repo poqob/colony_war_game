@@ -13,6 +13,7 @@ String *newString(char *s)
     strcpy(str->str, s);
     str->destroy = &destroyString;
     str->getSize = &getStringSize;
+    str->append = &appendString;
     return str;
 }
 
@@ -25,4 +26,10 @@ void destroyString(String *str)
 int getStringSize(String *str)
 {
     return (str->len / sizeof(char)) + 1;
+}
+
+void appendString(String *this, String *str)
+{
+    this->len += strlen(str->str);
+    strcat(this->str, str->str);
 }

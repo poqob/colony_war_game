@@ -8,9 +8,11 @@ struct String
     int len;
     void (*destroy)(String *string);
     int (*getSize)(String *string);
+    void (*append)(String *string);
 };
 
 String *newString(char *s);
 void destroyString(String *str);
 int getStringSize(String *str);
+void appendString(String *this, String *str);
 #endif // STRING
