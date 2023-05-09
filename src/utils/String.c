@@ -13,7 +13,8 @@ String *newString(char *s)
     strcpy(str->str, s);
     str->destroy = &destroyString;
     str->getSize = &getStringSize;
-    str->append = &appendString;
+    str->appendStr = &appendString;
+    str->appendInt = &appendIntager;
     return str;
 }
 
@@ -32,4 +33,11 @@ void appendString(String *this, String *str)
 {
     this->len += strlen(str->str);
     strcat(this->str, str->str);
+}
+void appendIntager(String *this, int val)
+{
+    char str[10]; // intager ,Number of digits
+    sprintf(str, "%d", val);
+    this->len += strlen(str);
+    strcat(this->str, str);
 }
