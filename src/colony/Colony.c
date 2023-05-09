@@ -205,7 +205,61 @@ void destroyColony(Colony *this)
     free(this);
 }
 
-void toStringColony(Colony *this)
+// yahu ben bunu nasil silecegim bellekten??? kullanildigi yerde silinsin kullanima en uygun oyle oluyor
+String *toStringColony(Colony *this)
 {
-    String *lifeStatue = newString("");
+    // output
+    String *output = newString("\n***************************\n");
+
+    // symbol
+    output->appendStr(output, newString("symbol: "));
+    output->appendChar(output, &this->symbol);
+    output->appendChar(output, "\n");
+
+    // life status
+    output->appendChar(output, "life status: ");
+    output->appendInt(output, this->amIALive);
+    output->appendChar(output, "\n");
+
+    // population
+    output->appendChar(output, "population: ");
+    output->appendInt(output, this->population);
+    output->appendChar(output, "\n");
+
+    // food stock
+    output->appendChar(output, "food stock: ");
+    output->appendInt(output, this->foodStock);
+    output->appendChar(output, "\n");
+
+    // strategy type
+    output->appendChar(output, "strategy type: ");
+    output->appendChar(output, StrategiesStrings[this->strategyType]);
+    output->appendChar(output, "\n");
+
+    // fight power
+    output->appendChar(output, "fight power: ");
+    output->appendInt(output, this->fightPower);
+    output->appendChar(output, "\n");
+
+    // Manufacturer type
+    output->appendChar(output, "Manufacturer type: ");
+    output->appendChar(output, ManufacturesStrings[this->manufactureType]);
+    output->appendChar(output, "\n");
+
+    // Manufacturer power
+    output->appendChar(output, "Manufacture power: ");
+    output->appendInt(output, this->manufacturePower);
+    output->appendChar(output, "\n");
+
+    // Victory count
+    output->appendChar(output, "Victories: ");
+    output->appendInt(output, this->victory);
+    output->appendChar(output, "\n");
+
+    // Loose count
+    output->appendChar(output, "Looses: ");
+    output->appendInt(output, this->loose);
+    output->appendChar(output, "\n***************************\n");
+
+    return output;
 }

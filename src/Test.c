@@ -43,7 +43,9 @@ int main(int argc, char *argv[])
 
     // TODO: create colony according to mock data. DONE
     Colony *colony = newColony(mock);
-    printf("\ncolony symbol: %c ", colony->symbol);
+
+    printf("\n%s\n", colony->toString(colony)->str);
+
     colony->destroyColony(colony);
 
     String *myStr = newString("zort");
@@ -76,7 +78,9 @@ int main(int argc, char *argv[])
 
     String *noerr = newString("\nno error.");
     String *trol = newString("\ntrol.");
-    noerr->append(noerr, trol);
+    noerr->appendStr(noerr, trol);
+    noerr->appendInt(noerr, q);
+    noerr->appendChar(noerr, "\n@@@\n");
     printf(noerr->str);
 
     return 0;

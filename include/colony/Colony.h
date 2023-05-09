@@ -35,7 +35,7 @@ struct Colony
     // functions
     void (*destroyColony)(Colony *);
     void (*grow)(Colony *);
-    void (*toString)(Colony *);
+    String *(*toString)(Colony *);
 
     int fightPower;
     int manufacturePower;
@@ -44,6 +44,6 @@ struct Colony
 Colony *newColony(int);
 void destroyColony(Colony *);
 void colonyGrow(Colony *);
-void toStringColony(Colony *);
+String *toStringColony(Colony *);
 
 #endif // COLONY
