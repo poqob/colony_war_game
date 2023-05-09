@@ -13,6 +13,7 @@ struct String
     int (*getSize)(String *this);
     void (*appendStr)(String *this, String *string);
     void (*appendInt)(String *this, int val);
+    void (*appendChar)(String *this, char *val);
 };
 
 String *newString(char *s);
@@ -20,4 +21,5 @@ void destroyString(String *str);
 int getStringSize(String *str);
 void appendString(String *this, String *str);
 void appendIntager(String *this, int val);
+void appendCharacterArray(String *this, char *val);
 #endif // STRING
