@@ -11,5 +11,5 @@ typedef enum
     INT = INT_SIZE,
     _COLONY = COLONY_SIZE
 } DataType;
-extern const char *DataTypeStrings[];
+extern char *DataTypeStrings[];
 #endif // DATATYPES
