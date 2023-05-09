@@ -1,6 +1,7 @@
 #if !defined(COLONY)
 #define COLONY
 #define INDEX 1000
+#define POPULATION_SCALE_AS_PERCENTAGE 120
 #include <stdio.h>
 #include <stdlib.h>
 #include "../utils/Bool.h"
@@ -22,6 +23,8 @@ struct Colony
     int population;
     boolean amIALive;
     char symbol; // char code 1-21
+    int victory;
+    int loose;
 
     void *strategy;
     enum Strategies strategyType; // stores which strategy struct picked.
@@ -30,12 +33,14 @@ struct Colony
     enum Manufactures manufactureType; // stores which manufacture struct picked.
     // functions
     void (*destroyColony)(Colony *);
+    void (*grow)(Colony *);
 
     int fightPower;
     int manufacturePower;
 };
 
-Colony *newColony(int population);
-void destroyColony(Colony *colony);
+Colony *newColony(int);
+void destroyColony(Colony *);
+void colonyGrow(Colony *);
 
 #endif // COLONY

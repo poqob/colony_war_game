@@ -136,6 +136,8 @@ Colony *newColony(int population)
     this->population = population;
     this->symbol = population % 21; // in ascii symbols defined between 1-21
     this->foodStock = population * population;
+    this->victory = 0;
+    this->loose = 0;
 
     this->strategy = pickStrategy(this); // attempt strategy and strategy type.
 
@@ -146,6 +148,44 @@ Colony *newColony(int population)
     this->manufacturePower = getManufacturePower(this);
 
     this->destroyColony = &destroyColony;
+
+    this->grow = &colonyGrow;
+}
+
+void colonyGrow(Colony *this)
+{
+    if (this->amIALive == true)
+    {
+
+        // new population per round.
+        this->population = this->population * POPULATION_SCALE_AS_PERCENTAGE / 100;
+
+        // minus food stock
+        this->foodStock -= this->population * 2;
+
+        //  produce according to updated population.
+        switch (this->manufactureType)
+        {
+        case manufacture0:
+            this->foodStock += ((Manufacture0 *)this->manufacture)->produce();
+            break;
+        case manufacture1:
+            this->foodStock += ((Manufacture1 *)this->manufacture)->produce();
+            break;
+        case manufacture2:
+            this->foodStock += ((Manufacture2 *)this->manufacture)->produce();
+            break;
+        default:
+            break;
+        }
+
+        // controlling if food stock is under level zero.
+        if (this->foodStock <= 0)
+        {
+            this->amIALive = false;
+            return;
+        }
+    }
 }
 
 void destroyColony(Colony *this)
