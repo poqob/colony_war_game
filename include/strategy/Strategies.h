@@ -4,3 +4,4 @@ enum Strategies
     strategy1,
     strategy2
 };
+extern const char *StrategiesStrings[];
