@@ -19,14 +19,11 @@ void createPlayers(ArrayList *populations, Game *this)
 // local function --private
 void aVSb(Colony *c0, Colony *c1)
 {
-
-    printf("c0 population before war: %d\nc1 population before war: %d\n", c0->population, c1->population);
-
     // combat forces ratio ~ population ratio
-    double ratio;
+    float ratio;
     if (c0->fightPower > c1->fightPower)
     {
-        ratio = (c0->fightPower - c1->fightPower) / INDEX;
+        ratio = (float)(c0->fightPower - c1->fightPower) / INDEX;
         c1->population -= c1->population * ratio; // reduce c1's(looser) population.
 
         // transfer c1's(looser) food stock to c0(winner)
@@ -35,7 +32,7 @@ void aVSb(Colony *c0, Colony *c1)
     }
     else if (c0->fightPower < c1->fightPower)
     {
-        ratio = (c1->fightPower - c0->fightPower) / INDEX;
+        ratio = (float)(c1->fightPower - c0->fightPower) / INDEX;
         c0->population -= c0->population * ratio; // reduce c0's(looser) population.
 
         // transfer c0's(looser) food stock to c1(winner)
@@ -47,7 +44,7 @@ void aVSb(Colony *c0, Colony *c1)
         // compare population scales.
         if (c0->population > c1->population)
         {
-            ratio = (c0->population - c1->population) / INDEX;
+            ratio = (float)(c0->population - c1->population) / INDEX;
             c1->population -= c1->population * ratio; // reduce c1's(looser) population.
 
             // transfer c1's(looser) food stock to c0(winner)
@@ -56,7 +53,7 @@ void aVSb(Colony *c0, Colony *c1)
         }
         else if (c0->population < c1->population)
         {
-            ratio = (c1->population - c0->population) / INDEX;
+            ratio = (float)(c1->population - c0->population) / INDEX;
             c0->population -= c0->population * ratio; // reduce c0's(looser) population.
 
             // transfer c0's(looser) food stock to c1(winner)
@@ -70,7 +67,7 @@ void aVSb(Colony *c0, Colony *c1)
             if ((rand() % 2) == 0)
             {
                 // randomly colony0 is winner
-                ratio = (c0->foodStock - c1->foodStock) / INDEX;
+                ratio = (float)(c0->foodStock - c1->foodStock) / INDEX;
                 c1->population -= c1->population * ratio; // reduce c1's(looser) population.
 
                 // transfer c1's(looser) food stock to c0(winner)
@@ -80,7 +77,7 @@ void aVSb(Colony *c0, Colony *c1)
             else
             {
                 // randomly colony1 is winner
-                ratio = (c1->foodStock, -c0->foodStock) / INDEX;
+                ratio = (float)(c1->foodStock, -c0->foodStock) / INDEX;
                 c0->population -= c0->population * ratio; // reduce c0's(looser) population.
 
                 // transfer c0's(looser) food stock to c1(winner)
@@ -90,17 +87,13 @@ void aVSb(Colony *c0, Colony *c1)
         }
     }
     // above results: populations affected, foodstocks transfared.
-    // test output
-    printf("\nc0 population: %d\nc1 population: %d\n ratio: %lf\n", c0->population, c1->population, ratio);
 }
 // local function --private
 // TODO: combat, report, grow
-void combatOrganizer(Game *game)
+void combatOrganizer(ArrayList *cols)
 {
-    ArrayList *cols;
     Colony *c0;
     Colony *c1;
-    cols = game->colonies;
     // combat alghorithm
     int i, j = 0;
     for (i = 0; i < cols->size - 1; i++)
@@ -165,7 +158,7 @@ void gamePlay(Game *game)
         game->totalWarCount += warCount;
         game->tour++;
 
-        combatOrganizer(game);
+        combatOrganizer(game->colonies);
 
         break; // test break;
     } while (isThereMoreThanOneColonyALive == true);
