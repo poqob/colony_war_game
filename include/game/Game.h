@@ -4,6 +4,7 @@
 #include "../utils/String.h"
 #include "../utils/Bool.h"
 #include "../utils/ArrayList.h"
+#include <time.h>
 
 typedef struct Game Game;
 

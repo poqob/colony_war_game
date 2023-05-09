@@ -17,27 +17,106 @@ void createPlayers(ArrayList *populations, Game *this)
 }
 
 // local function --private
-// TODO: to complate
-void colonyFight(ArrayList *colonies)
+void aVSb(Colony *c0, Colony *c1)
 {
-    Colony *colony;
-    int i;
-    for (i = 0; i < colonies->size; i++)
+    // combat forces ratio ~ population ratio
+    double ratio;
+    if (c0->fightPower > c1->fightPower)
     {
-        colony = ((Colony *)colonies->get(colonies, i));
-        printf("%d ", colony->manufacturePower);
-    }
+        ratio = (c0->fightPower - c1->fightPower) / INDEX;
+        c1->population -= c1->population * ratio; // reduce c1's(looser) population.
 
-    INDEX;
+        // transfer c1's(looser) food stock to c0(winner)
+        c0->foodStock += c1->foodStock * ratio;
+        c1->foodStock -= c1->foodStock * ratio;
+    }
+    else if (c0->fightPower < c1->fightPower)
+    {
+        ratio = (c1->fightPower - c0->fightPower) / INDEX;
+        c0->population -= c0->population * ratio; // reduce c0's(looser) population.
+
+        // transfer c0's(looser) food stock to c1(winner)
+        c1->foodStock += c0->foodStock * ratio;
+        c0->foodStock -= c0->foodStock * ratio;
+    }
+    else // c0:fp == c1:fp situation
+    {
+        // compare population scales.
+        if (c0->population > c1->population)
+        {
+            ratio = (c0->population - c1->population) / INDEX;
+            c1->population -= c1->population * ratio; // reduce c1's(looser) population.
+
+            // transfer c1's(looser) food stock to c0(winner)
+            c0->foodStock += c1->foodStock * ratio;
+            c1->foodStock -= c1->foodStock * ratio;
+        }
+        else if (c0->population < c1->population)
+        {
+            ratio = (c1->population - c0->population) / INDEX;
+            c0->population -= c0->population * ratio; // reduce c0's(looser) population.
+
+            // transfer c0's(looser) food stock to c1(winner)
+            c1->foodStock += c0->foodStock * ratio;
+            c0->foodStock -= c0->foodStock * ratio;
+        }
+        else // c0:population equals c1:population situation
+        {
+            // ratio depends on foodStocks
+            srand(time(NULL)); // Seed the random number generator with the current time
+            if ((rand() % 2) == 0)
+            {
+                // randomly colony0 is winner
+                ratio = (c0->foodStock - c1->foodStock) / INDEX;
+                c1->population -= c1->population * ratio; // reduce c1's(looser) population.
+
+                // transfer c1's(looser) food stock to c0(winner)
+                c0->foodStock += c1->foodStock * ratio;
+                c1->foodStock -= c1->foodStock * ratio;
+            }
+            else
+            {
+                // randomly colony1 is winner
+                ratio = (c1->foodStock, -c0->foodStock) / INDEX;
+                c0->population -= c0->population * ratio; // reduce c0's(looser) population.
+
+                // transfer c0's(looser) food stock to c1(winner)
+                c1->foodStock += c0->foodStock * ratio;
+                c0->foodStock -= c0->foodStock * ratio;
+            }
+        }
+    }
+    // above results: populations affected, foodstocks transfared.
+}
+// local function --private
+// TODO: combat, report, grow
+void tour(Game *game)
+{
+    // combat
+
+    // report
+
+    // grow
 }
 
 // local function --private
-int calculatePossibleWarCount(int colonyCount)
+// a,b,c,d colonies. a vs b,c,d | b vs c,d | c vs d | 3+2+1=6
+int calculatePossibleWarCountPerRound(ArrayList *colonies)
 {
-    int result;
+    int colonyCount = 0;
+    int i;
+    // to count alive colonies.
+    for (i = 0; i < colonies->size; i++)
+    {
+        if (((Colony *)colonies->get(colonies, i))->amIALive == true)
+        {
+            colonyCount++;
+        }
+    }
 
+    // return total war count
     if (colonyCount % 2 == 0)
-        return (((colonyCount) / 2) - 1) * colonyCount + colonyCount / 2;
+        return (((colonyCount) / 2) - 1) * colonyCount + (colonyCount / 2);
     else
         return (colonyCount / 2) * colonyCount;
 }
@@ -50,8 +129,8 @@ Game *newGame(ArrayList *populations)
     this->report = &gameReport;
     this->play = &gamePlay;
     createPlayers(populations, this);
-    this->tour = 0;
-    this->totalWarCount = calculatePossibleWarCount(this->colonies->size);
+    this->tour = -1;
+    this->totalWarCount = 0;
 };
 
 // TODO: works like: in while loop, play-analyze-play ; analyze: Keep playing until there is only one colony left. ; update possible war count after every tour.
@@ -59,10 +138,22 @@ Game *newGame(ArrayList *populations)
 // TODO: update calculatePossibleWarCount method, new parameters : colony list or colonies that are still alive.
 void gamePlay(Game *game)
 {
+    boolean isThereMoreThanOneColonyALive;
+    int warCount;
     int i;
-    for (i = 0; i < game->totalWarCount; i++)
+
+    do
     {
-    }
+        warCount = calculatePossibleWarCountPerRound(game->colonies);
+        isThereMoreThanOneColonyALive = (warCount != 0) ? true : false;
+        game->totalWarCount += warCount;
+        game->tour++;
+
+        tour(game);
+
+        break; // test break;
+    } while (isThereMoreThanOneColonyALive == true);
+    printf("\ngame done.\n");
 };
 
 // TODO: console output after every tour.
