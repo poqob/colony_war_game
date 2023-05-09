@@ -1,9 +1,9 @@
 #include "../../include/utils/String.h"
-#include <string.h>
 
 // add them to prevent compile time warnings(not error).
 size_t strlen(const char *s);
 char *strcpy(char *dest, const char *src);
+void *strcat(char *dest, const char *src);
 
 String *newString(char *s)
 {
