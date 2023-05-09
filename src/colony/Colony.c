@@ -154,6 +154,13 @@ Colony *newColony(int population)
 
 void colonyGrow(Colony *this)
 {
+    // controlling population, if the population is under 0 set colony is dead.
+    if (this->population <= 0)
+    {
+        this->amIALive = false;
+        return;
+    }
+
     if (this->amIALive == true)
     {
 
