@@ -20,6 +20,7 @@ int getFightPower(Colony *colony)
     }
 }
 
+// local function --private
 int getManufacturePower(Colony *colony)
 {
     switch (colony->manufactureType)
@@ -150,6 +151,8 @@ Colony *newColony(int population)
     this->destroyColony = &destroyColony;
 
     this->grow = &colonyGrow;
+
+    this->toString = &toStringColony;
 }
 
 void colonyGrow(Colony *this)
@@ -200,4 +203,9 @@ void destroyColony(Colony *this)
     destroyStrategy(this);
     destroyManufacture(this);
     free(this);
+}
+
+void toStringColony(Colony *this)
+{
+    String *lifeStatue = newString("");
 }

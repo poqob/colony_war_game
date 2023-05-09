@@ -19,6 +19,9 @@ void createPlayers(ArrayList *populations, Game *this)
 // local function --private
 void aVSb(Colony *c0, Colony *c1)
 {
+
+    printf("c0 population before war: %d\nc1 population before war: %d\n", c0->population, c1->population);
+
     // combat forces ratio ~ population ratio
     double ratio;
     if (c0->fightPower > c1->fightPower)
@@ -87,16 +90,29 @@ void aVSb(Colony *c0, Colony *c1)
         }
     }
     // above results: populations affected, foodstocks transfared.
+    // test output
+    printf("\nc0 population: %d\nc1 population: %d\n ratio: %lf\n", c0->population, c1->population, ratio);
 }
 // local function --private
 // TODO: combat, report, grow
-void tour(Game *game)
+void combatOrganizer(Game *game)
 {
-    // combat
+    ArrayList *cols;
+    Colony *c0;
+    Colony *c1;
+    cols = game->colonies;
+    // combat alghorithm
+    int i, j = 0;
+    for (i = 0; i < cols->size - 1; i++)
+    {
+        c0 = ((Colony *)cols->get(cols, i));
 
-    // report
-
-    // grow
+        for (j = i + 1; j < cols->size; j++)
+        {
+            c1 = ((Colony *)cols->get(cols, j));
+            aVSb(c0, c1); // FIGHTTTTTT
+        }
+    }
 }
 
 // local function --private
@@ -149,7 +165,7 @@ void gamePlay(Game *game)
         game->totalWarCount += warCount;
         game->tour++;
 
-        tour(game);
+        combatOrganizer(game);
 
         break; // test break;
     } while (isThereMoreThanOneColonyALive == true);

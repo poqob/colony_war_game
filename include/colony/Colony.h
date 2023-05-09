@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../utils/Bool.h"
+#include "../utils/String.h"
 #include "../strategy/Strategies.h"
 #include "../strategy/Strategy0.h"
 #include "../strategy/Strategy1.h"
@@ -34,6 +35,7 @@ struct Colony
     // functions
     void (*destroyColony)(Colony *);
     void (*grow)(Colony *);
+    void (*toString)(Colony *);
 
     int fightPower;
     int manufacturePower;
@@ -42,5 +44,6 @@ struct Colony
 Colony *newColony(int);
 void destroyColony(Colony *);
 void colonyGrow(Colony *);
+void toStringColony(Colony *);
 
 #endif // COLONY

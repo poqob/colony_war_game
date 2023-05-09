@@ -74,7 +74,10 @@ int main(int argc, char *argv[])
 
     game->destroy(game);
 
-    printf("\nno error.");
+    String *noerr = newString("\nno error.");
+    String *trol = newString("\ntrol.");
+    noerr->append(noerr, trol);
+    printf(noerr->str);
 
     return 0;
 }
