@@ -158,6 +158,7 @@ Game *newGame(ArrayList *populations)
     this->totalWarCount = 0;
 };
 
+// TODO: create a logger function, create logs for each tour. store logs in an array. send them to ui.
 void gamePlay(Game *game)
 {
     boolean isThereMoreThanOneColonyALive;
