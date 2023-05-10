@@ -5,10 +5,10 @@ typedef struct Ui Ui;
 
 struct Ui
 {
-    void (*write)(String *);
+    void (*write)(Ui *, String *);
     void (*destroy)(Ui *);
 };
-Ui *newUi(Ui *);
+Ui *newUi();
 void uiWrite(Ui *, String *);
 void uiDestroy(Ui *);
 #endif // UI
