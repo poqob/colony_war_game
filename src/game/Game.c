@@ -88,8 +88,13 @@ void aVSb(Colony *c0, Colony *c1)
     }
     // above results: populations affected, foodstocks transfared.
 }
+
 // local function --private
-// TODO: combat, report, grow
+/*
+All members of the colony list should fight only once with each other.
+ 'i' represents the colony that is being held and it is the turn to fight.
+  'j' represents the colonies that have not yet fought (ready to fight) with 'i'
+  */
 void combatOrganizer(ArrayList *cols)
 {
     Colony *c0;
@@ -105,6 +110,17 @@ void combatOrganizer(ArrayList *cols)
             c1 = ((Colony *)cols->get(cols, j));
             aVSb(c0, c1); // FIGHTTTTTT
         }
+    }
+}
+
+void growOrganizer(ArrayList *cols)
+{
+    Colony *col;
+    int i = 0;
+    for (i = 0; i < cols->size; i++)
+    {
+        col = ((Colony *)cols->get(cols, i));
+        col->grow(col);
     }
 }
 
@@ -158,15 +174,33 @@ void gamePlay(Game *game)
         game->totalWarCount += warCount;
         game->tour++;
 
-        combatOrganizer(game->colonies);
+        combatOrganizer(game->colonies); // WORKS FINE
+        growOrganizer(game->colonies);   // WORKS FINE
 
-        break; // test break;
+        // break; // test break;
     } while (isThereMoreThanOneColonyALive == true);
+    game->report(game); // TEST
+
     printf("\ngame done.\n");
 };
 
 // TODO: console output after every tour.
-void gameReport(Game *game){};
+// TODO: single line by line report. NOT TOSTRING()
+void gameReport(Game *game)
+{
+    String *inspect;
+    Colony *col;
+    int i;
+    for (i = 0; i < game->colonies->size; i++)
+    {
+        col = ((Colony *)game->colonies->get(game->colonies, i));
+        inspect = col->toString(col);
+        inspect->appendChar(inspect, "@@@@@@@@@@@");
+        inspect->appendInt(inspect, i);
+        printf(inspect->str);
+        inspect->destroy(inspect);
+    }
+};
 
 void destroyGame(Game *this)
 {
