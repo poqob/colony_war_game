@@ -156,28 +156,46 @@ Game *newGame(ArrayList *populations)
     createPlayers(populations, this);
     this->tour = -1;
     this->totalWarCount = 0;
+    this->toursLogPack = createArrayList(10, _ARRAYLIST);
 };
+ArrayList *logger(ArrayList *colonies)
+{
+    // DebugPrinter *dprinter = newDebugPrinter();
+    ArrayList *logs = createArrayList(colonies->size + 1, _LOG);
+    Colony *colony;
+    Log *log;
 
-// TODO: create a logger function, create logs for each tour. store logs in an array. send them to ui.
+    int i;
+    int *res = colonies->size;
+    for (i = 0; i < colonies->size; i++)
+    {
+        colony = ((Colony *)colonies->get(colonies, i));
+        log = newLog(colony);
+        // dprinter->println(log, _LOG);
+        logs->append(logs, log);
+    }
+
+    return logs;
+}
+// TODO: create a logger function, create logs for each tour. store logs in an array. <- done| send them to ui.
 void gamePlay(Game *game)
 {
-    boolean isThereMoreThanOneColonyALive;
-    int warCount;
-    int i;
-
-    do
+    ArrayList *logs;
+    int warCount = calculatePossibleWarCountPerRound(game->colonies);
+    boolean isThereMoreThanOneColonyALive = (warCount != 0) ? true : false;
+    while (isThereMoreThanOneColonyALive == true)
     {
-        warCount = calculatePossibleWarCountPerRound(game->colonies);
-        isThereMoreThanOneColonyALive = (warCount != 0) ? true : false;
+
         game->totalWarCount += warCount;
         game->tour++;
 
         combatOrganizer(game->colonies); // WORKS FINE
+        logs = logger(game->colonies);   // WORKS FINE
         growOrganizer(game->colonies);   // WORKS FINE
 
-        // break; // test break;
-    } while (isThereMoreThanOneColonyALive == true);
-    // game->inspect(game); // TEST
+        warCount = calculatePossibleWarCountPerRound(game->colonies);
+        isThereMoreThanOneColonyALive = (warCount != 0) ? true : false;
+    }
 };
 
 void gameInspect(Game *game)
@@ -198,6 +216,29 @@ void gameInspect(Game *game)
 
 void destroyGame(Game *this)
 {
+    ArrayList *list; // temp arraylist
+    Log *log;        // temp log
+    int i, j;        // loop variables
+
+    // roam through the this->toursLogPack which stores arraylists for each tour logs.
+    for (i = 0; i < this->toursLogPack->size; i++)
+    {
+        list = this->toursLogPack->get(this->toursLogPack, i);
+
+        // roam through the log list.
+        for (j = 0; j < list->size; j++)
+        {
+            // destroy logs
+            log = ((Log *)list->get(list, j));
+            log->destroy(log);
+        }
+        // destroy log list
+        list->destroyArrayList(list);
+    }
+    // destroy list of lists
+    this->toursLogPack->destroyArrayList(this->toursLogPack);
+    // destroy colonies
     this->colonies->destroyArrayList(this->colonies);
+    // destroy the game
     free(this);
 };

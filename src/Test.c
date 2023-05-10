@@ -76,7 +76,6 @@ int main(int argc, char *argv[])
     populations->append(populations, &p);
     Game *game = newGame(populations);
     game->play(game);
-    printf("\ntotal war count: %d\n", game->totalWarCount);
 
     game->destroy(game);
     // DEBUGPRINTER TEST
@@ -85,6 +84,7 @@ int main(int argc, char *argv[])
     // LOG TEST
     Colony *coll = newColony(98);
     Log *log = newLog(coll);
+    dprinter->println("\n\nTEST LOG", CHAR);
     dprinter->println(log, _LOG);
     dprinter->destroy(dprinter);
     log->destroy(log);
