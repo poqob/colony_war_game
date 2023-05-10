@@ -13,14 +13,14 @@ struct Game
     ArrayList *colonies;
     int totalWarCount;
     int tour;
-    void (*report)(Game *);
+    void (*inspect)(Game *);
     void (*destroy)(Game *);
     void (*play)(Game *);
 };
 
 Game *newGame(ArrayList *populations);
 void destroyGame(Game *game);
-void gameReport(Game *game);
+void gameInspect(Game *game);
 void gamePlay(Game *game);
 
 #endif // GAME

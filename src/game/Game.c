@@ -151,16 +151,13 @@ Game *newGame(ArrayList *populations)
     // popoulations array list stores intager values
     Game *this = (Game *)malloc(sizeof(Game));
     this->destroy = &destroyGame;
-    this->report = &gameReport;
+    this->inspect = &gameInspect;
     this->play = &gamePlay;
     createPlayers(populations, this);
     this->tour = -1;
     this->totalWarCount = 0;
 };
 
-// TODO: works like: in while loop, play-analyze-play ; analyze: Keep playing until there is only one colony left. ; update possible war count after every tour.
-// TODO: What is the total number of wars that can be experienced among colonies? CALCULATE Done.
-// TODO: update calculatePossibleWarCount method, new parameters : colony list or colonies that are still alive.
 void gamePlay(Game *game)
 {
     boolean isThereMoreThanOneColonyALive;
@@ -179,14 +176,10 @@ void gamePlay(Game *game)
 
         // break; // test break;
     } while (isThereMoreThanOneColonyALive == true);
-    game->report(game); // TEST
-
-    printf("\ngame done.\n");
+    // game->inspect(game); // TEST
 };
 
-// TODO: console output after every tour.
-// TODO: single line by line report. NOT TOSTRING()
-void gameReport(Game *game)
+void gameInspect(Game *game)
 {
     String *inspect;
     Colony *col;
