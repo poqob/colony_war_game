@@ -16,7 +16,35 @@ void append(ArrayList *list, void *data)
     if (list->size >= list->capacity)
     {
         int newCapacity = list->capacity * 2;
-        list->array = (void **)realloc(list->array, newCapacity * sizeof(list->dataType));
+
+        switch (list->dataType)
+        {
+        case CHAR:
+            list->array = (void **)realloc(list->array, newCapacity * sizeof(char *));
+            break;
+        case INT:
+            list->array = (void **)realloc(list->array, newCapacity * sizeof(int *));
+            break;
+        case PTR:
+            list->array = (void **)realloc(list->array, newCapacity * sizeof(void *));
+            break;
+        case _ARRAYLIST:
+            list->array = (void **)realloc(list->array, newCapacity * sizeof(ArrayList *));
+            break;
+        case _COLONY:
+            list->array = (void **)realloc(list->array, newCapacity * sizeof(Colony *));
+            break;
+        case BOOL:
+            list->array = (void **)realloc(list->array, newCapacity * sizeof(boolean *));
+            break;
+        case _STRING:
+            list->array = (void **)realloc(list->array, newCapacity * sizeof(String *));
+            break;
+        default:
+            list->array = (void **)realloc(list->array, newCapacity * sizeof(void *));
+            break;
+        }
+
         list->capacity = newCapacity;
     }
 
