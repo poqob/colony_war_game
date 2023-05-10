@@ -8,6 +8,11 @@
         "strategy1.h": "c",
         "manufacture0.h": "c",
         "manufactures.h": "c",
-        "manufacture1.h": "c"
+        "manufacture1.h": "c",
+        "bit": "c",
+        "compare": "c",
+        "cstddef": "c",
+        "limits": "c",
+        "type_traits": "c"
     }
 }

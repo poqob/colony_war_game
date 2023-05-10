@@ -1,16 +1,19 @@
 #include <stdio.h>
+#include "../include/utils/DebugPrinter.h"
 #include "../include/utils/ArrayList.h"
 #include "../include/utils/DataType.h"
 #include "../include/utils/ArrayList.h"
 #include "../include/Colony/Colony.h"
 #include "../include/utils/String.h"
 #include "../include/game/Game.h"
+#include "../include/log/Log.h"
 
 // TODO:
 // create game structure to manage the game.
 // complate the Colony structure, add produce, fight modules.
 int main(int argc, char *argv[])
 {
+    // ARRAYLIST TEST
     int mock = 23;
     ArrayList *list = createArrayList(10, INT);
     ArrayList *clist = createArrayList(10, CHAR);
@@ -56,7 +59,7 @@ int main(int argc, char *argv[])
 
     printf("\n");
 
-    // console argument test
+    // ARGUMENTS TEST
     int i;
 
     for (i = 0; i < argc; i++)
@@ -65,6 +68,7 @@ int main(int argc, char *argv[])
         printf("arg %d: %d\n", i, zz);
     }
 
+    // GAME TEST
     int q = 21;
     int p = 35;
     ArrayList *populations = createArrayList(4, INT);
@@ -75,13 +79,25 @@ int main(int argc, char *argv[])
     printf("\ntotal war count: %d\n", game->totalWarCount);
 
     game->destroy(game);
+    // DEBUGPRINTER TEST
+    DebugPrinter *dprinter = newDebugPrinter();
 
+    // LOG TEST
+    Colony *coll = newColony(98);
+    Log *log = newLog(coll);
+    dprinter->println(log, _LOG);
+    dprinter->destroy(dprinter);
+    log->destroy(log);
+    coll->destroyColony(coll);
+
+    // STRING TEST
     String *noerr = newString("\nno error.");
     String *trol = newString("\ntrol.");
     noerr->appendStr(noerr, trol);
     noerr->appendInt(noerr, q);
     noerr->appendChar(noerr, "\n@@@\n");
     printf(noerr->str);
-
+    noerr->destroy(noerr);
+    trol->destroy(trol);
     return 0;
 }
