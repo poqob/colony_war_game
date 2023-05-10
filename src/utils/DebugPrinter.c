@@ -21,6 +21,9 @@ void printDebugPrinter(void *exprassion, DataType dataType)
     case INT:
         printf("%d", ((int *)exprassion));
         break;
+    case PTR:
+        printf("void");
+        break;
     case BOOL:
         printf("%d", ((int *)exprassion));
         break;
@@ -33,7 +36,6 @@ void printDebugPrinter(void *exprassion, DataType dataType)
         printf("%s", ((String *)exprassion)->str);
         break;
     case _LOG:
-
         log = ((Log *)exprassion);
         printf("%s", log->toString(log)->str);
         break;
@@ -56,6 +58,10 @@ void printlnDebugPrinter(void *exprassion, DataType dataType)
     case INT:
         printf("%d\n", ((int *)exprassion));
         break;
+
+    case PTR:
+        printf("void\n");
+        break;
     case BOOL:
         printf("%d\n", ((int *)exprassion));
         break;
@@ -68,10 +74,10 @@ void printlnDebugPrinter(void *exprassion, DataType dataType)
         printf("%s\n", ((String *)exprassion)->str);
         break;
     case _LOG:
-
         log = ((Log *)exprassion);
         printf("%s\n", log->toString(log)->str);
         break;
+
     default:
         printf("UNSPORTED DATA TYPE");
         break;
