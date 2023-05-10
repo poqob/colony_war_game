@@ -156,8 +156,9 @@ Game *newGame(ArrayList *populations)
     createPlayers(populations, this);
     this->tour = -1;
     this->totalWarCount = 0;
-    this->toursLogPack = createArrayList(10, _ARRAYLIST);
+    this->toursLogPack = createArrayList(100, PTR);
 };
+
 ArrayList *logger(ArrayList *colonies)
 {
     // DebugPrinter *dprinter = newDebugPrinter();
@@ -166,7 +167,6 @@ ArrayList *logger(ArrayList *colonies)
     Log *log;
 
     int i;
-    int *res = colonies->size;
     for (i = 0; i < colonies->size; i++)
     {
         colony = ((Colony *)colonies->get(colonies, i));
@@ -177,10 +177,10 @@ ArrayList *logger(ArrayList *colonies)
 
     return logs;
 }
-// TODO: create a logger function, create logs for each tour. store logs in an array. <- done| send them to ui.
+
 void gamePlay(Game *game)
 {
-    ArrayList *logs;
+
     int warCount = calculatePossibleWarCountPerRound(game->colonies);
     boolean isThereMoreThanOneColonyALive = (warCount != 0) ? true : false;
     while (isThereMoreThanOneColonyALive == true)
@@ -190,8 +190,10 @@ void gamePlay(Game *game)
         game->tour++;
 
         combatOrganizer(game->colonies); // WORKS FINE
-        logs = logger(game->colonies);   // WORKS FINE
-        growOrganizer(game->colonies);   // WORKS FINE
+
+        game->toursLogPack->append(game->toursLogPack, logger(game->colonies));
+
+        growOrganizer(game->colonies); // WORKS FINE
 
         warCount = calculatePossibleWarCountPerRound(game->colonies);
         isThereMoreThanOneColonyALive = (warCount != 0) ? true : false;
