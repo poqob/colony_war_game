@@ -29,6 +29,9 @@ void aVSb(Colony *c0, Colony *c1)
         // transfer c1's(looser) food stock to c0(winner)
         c0->foodStock += c1->foodStock * ratio;
         c1->foodStock -= c1->foodStock * ratio;
+
+        c0->victory++;
+        c1->loose++;
     }
     else if (c0->fightPower < c1->fightPower)
     {
@@ -38,6 +41,9 @@ void aVSb(Colony *c0, Colony *c1)
         // transfer c0's(looser) food stock to c1(winner)
         c1->foodStock += c0->foodStock * ratio;
         c0->foodStock -= c0->foodStock * ratio;
+
+        c1->victory++;
+        c0->loose++;
     }
     else // c0:fp == c1:fp situation
     {
@@ -50,6 +56,9 @@ void aVSb(Colony *c0, Colony *c1)
             // transfer c1's(looser) food stock to c0(winner)
             c0->foodStock += c1->foodStock * ratio;
             c1->foodStock -= c1->foodStock * ratio;
+
+            c0->victory++;
+            c1->loose++;
         }
         else if (c0->population < c1->population)
         {
@@ -59,6 +68,9 @@ void aVSb(Colony *c0, Colony *c1)
             // transfer c0's(looser) food stock to c1(winner)
             c1->foodStock += c0->foodStock * ratio;
             c0->foodStock -= c0->foodStock * ratio;
+
+            c1->victory++;
+            c0->loose++;
         }
         else // c0:population equals c1:population situation
         {
@@ -73,6 +85,9 @@ void aVSb(Colony *c0, Colony *c1)
                 // transfer c1's(looser) food stock to c0(winner)
                 c0->foodStock += c1->foodStock * ratio;
                 c1->foodStock -= c1->foodStock * ratio;
+
+                c0->victory++;
+                c1->loose++;
             }
             else
             {
@@ -83,6 +98,9 @@ void aVSb(Colony *c0, Colony *c1)
                 // transfer c0's(looser) food stock to c1(winner)
                 c1->foodStock += c0->foodStock * ratio;
                 c0->foodStock -= c0->foodStock * ratio;
+
+                c1->victory++;
+                c0->loose++;
             }
         }
     }
@@ -158,7 +176,7 @@ Game *newGame(ArrayList *populations)
     this->totalWarCount = 0;
     this->toursLogPack = createArrayList(100, PTR);
 };
-
+// TODO: bind logger to a local function(method)
 ArrayList *logger(ArrayList *colonies)
 {
     // DebugPrinter *dprinter = newDebugPrinter();
