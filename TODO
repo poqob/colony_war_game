@@ -2,10 +2,14 @@ COLONY
 todo:   colony random symbol attempt problem-> some of character between 0-30 are not printable.
 think:  create a function, the fun. shall return propper symbol character from a printable symbol char array.
 
-UI-LOG
-todo:   check loose and victory values, some values are not in propper  memory block. some of logs has victory some  of them not.
-think:  maybe we should try directly printing the logs in uiShow method to dedect the issue. look ui-log->toString()
 
 GAME
 todo:   tour number is incorret.
 think:  ??????
+
+// TODO: bind logger to a local function(method) in Game.c
+
+ISSUE:
+GAME, aVsb: savaşlar serisinde ilk savaşinda populasyonu 0'lanabilecek bir koloni populasyon sayisi
+ ilk savaşinda hiç eksilmiyormuş gibi başka savaşlara da katiliyor. Yallnizca kayip senaryosu incelenebilir
+// TODO: GAME:AVSB METODU INCELENSIN.

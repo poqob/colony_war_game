@@ -10,7 +10,6 @@ Ui *newUi()
     return this;
 }
 
-// TODO: characters shifts after tour 6. LOOK FOR IT
 void uiShow(Ui *screen, ArrayList *listOfLogsList)
 {
     String *ptr = screen->output;

@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
     // GAME TEST
     int q = 54;
     int p = 49;
-    int g = 45;
+    int g = 47;
     int y = 67;
     ArrayList *populations = createArrayList(10, INT);
     populations->append(populations, &q);

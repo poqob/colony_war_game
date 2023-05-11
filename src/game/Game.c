@@ -122,10 +122,13 @@ void combatOrganizer(ArrayList *cols)
     for (i = 0; i < cols->size - 1; i++)
     {
         c0 = ((Colony *)cols->get(cols, i));
-
+        if (c0->amIALive != true)
+            continue;
         for (j = i + 1; j < cols->size; j++)
         {
             c1 = ((Colony *)cols->get(cols, j));
+            if (c1->amIALive != true)
+                continue;
             aVSb(c0, c1); // FIGHTTTTTT
         }
     }
@@ -198,7 +201,7 @@ ArrayList *logger(ArrayList *colonies)
 
 void gamePlay(Game *game)
 {
-
+    DebugPrinter *dprinter = newDebugPrinter();
     int warCount = calculatePossibleWarCountPerRound(game->colonies);
     boolean isThereMoreThanOneColonyALive = (warCount != 0) ? true : false;
     while (isThereMoreThanOneColonyALive == true)
@@ -210,12 +213,17 @@ void gamePlay(Game *game)
         combatOrganizer(game->colonies); // WORKS FINE
 
         game->toursLogPack->append(game->toursLogPack, logger(game->colonies));
-
         growOrganizer(game->colonies); // WORKS FINE
 
         warCount = calculatePossibleWarCountPerRound(game->colonies);
         isThereMoreThanOneColonyALive = (warCount != 0) ? true : false;
+        dprinter->print("tour: ", CHAR);
+        dprinter->print(game->tour, INT);
+        dprinter->print(" possible wars: ", CHAR);
+        dprinter->print(warCount, INT);
+        dprinter->println(" ", CHAR);
     }
+    dprinter->destroy(dprinter);
 };
 
 void gameInspect(Game *game)
