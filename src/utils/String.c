@@ -16,6 +16,7 @@ String *newString(char *s)
     str->appendStr = &appendString;
     str->appendInt = &appendIntager;
     str->appendChar = &appendCharacterArray;
+    str->trim = &trimString;
     return str;
 }
 
@@ -37,11 +38,13 @@ void appendString(String *this, String *str)
     strcat(this->str, str->str);               // add new characters.
 }
 
+// Use trim. Normally, str's length is 10 characters, even though val's length is not.
 void appendIntager(String *this, int val)
 {
-    char str[10];                              // intager ,Number of digits
-    sprintf(str, "%d", val);                   // attempt int value to str as char array
-    this->len += strlen(str) + 1;              // update lenght of string
+    char str[10];                 // intager ,Number of digits
+    sprintf(str, "%d", val);      // attempt int value to str as char array
+    this->len += strlen(str) + 1; // update lenght of string
+
     this->str = realloc(this->str, this->len); // realloc memory because we gonna add new characters to our array
     strcat(this->str, str);                    // add new characters.
 }
@@ -51,4 +54,58 @@ void appendCharacterArray(String *this, char *val)
     this->len += strlen(val) + 1;              // update lenght of string
     this->str = realloc(this->str, this->len); // realloc memory because we gonna add new characters to our array
     strcat(this->str, val);                    // add new characters.
+}
+
+String *trimString(String *this)
+{
+    int newlen = 0;
+    char *roam;
+    char *str = this->str;
+    char *end;
+
+    // Trim leading whitespace
+    while (isspace(*str))
+    {
+        str++;
+    }
+
+    if (*str == '\0')
+    { // String is all whitespace
+        return this;
+    }
+
+    // Trim trailing whitespace
+    end = str + strlen(str) - 1;
+    while (end > str && isspace(*end))
+    {
+        end--;
+    }
+    *(end + 1) = '\0';
+
+    // calculate new len
+    for (roam = str; roam < end; roam++)
+        newlen++;
+
+    this->len = newlen + 1;
+    this->str = realloc(this->str, *end);
+
+    return this;
+}
+
+String *newMultiplyString(char *chararr, int count)
+{
+    String *multiple;
+    int len = (strlen(chararr) * count) + 1;
+    char *result = (char *)malloc(len);
+    result[0] = '\0'; // Initialize result string
+
+    for (int i = 0; i < count; i++)
+    {
+        strcat(result, chararr);
+    }
+
+    result[len - 1] = '\0'; // Place null-terminator at correct index
+    multiple = newString(result);
+    multiple->trim(multiple); // Call trim on the String object's char array
+    return multiple;
 }
