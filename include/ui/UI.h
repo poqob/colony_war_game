@@ -1,14 +1,17 @@
 #if !defined(UI)
 #define UI
+#include "../utils/ArrayList.h"
 #include "../utils/String.h"
 typedef struct Ui Ui;
 
 struct Ui
 {
-    void (*write)(Ui *, String *);
+    String *output;
+    String *divider;
+    void (*show)(Ui *, ArrayList *);
     void (*destroy)(Ui *);
 };
 Ui *newUi();
-void uiWrite(Ui *, String *);
+void uiShow(Ui *, ArrayList *);
 void uiDestroy(Ui *);
 #endif // UI

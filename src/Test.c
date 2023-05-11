@@ -7,6 +7,7 @@
 #include "../include/utils/String.h"
 #include "../include/game/Game.h"
 #include "../include/log/Log.h"
+#include "../include/ui/UI.h"
 
 // TODO:
 // create game structure to manage the game.
@@ -68,9 +69,6 @@ int main(int argc, char *argv[])
         printf("arg %d: %d\n", i, zz);
     }
 
-    // DEBUGPRINTER TEST
-    DebugPrinter *dprinter = newDebugPrinter();
-
     // GAME TEST
     int q = 21;
     int p = 35;
@@ -79,12 +77,14 @@ int main(int argc, char *argv[])
     populations->append(populations, &p);
     Game *game = newGame(populations);
     game->play(game);
-    dprinter->print("list of logs size: ", CHAR);
-    dprinter->print(game->toursLogPack->size, INT);
-    dprinter->println("", CHAR);
+
+    // UI TEST
+    Ui *ui = newUi();
+    ui->show(ui, game->toursLogPack);
 
     game->destroy(game);
-
+    // DEBUGPRINTER TEST
+    DebugPrinter *dprinter = newDebugPrinter();
     // LOG TEST
     Colony *coll = newColony(98);
     Log *log = newLog(coll);
