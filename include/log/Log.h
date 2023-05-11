@@ -12,6 +12,7 @@ struct Log
     char symbol;
     int victory;
     int loose;
+    String *str;
 
     String *(*toString)(Log *);
     void (*destroy)(Log *);
