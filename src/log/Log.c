@@ -16,6 +16,7 @@ Log *newLog(Colony *colony)
 
 String *logToString(Log *this)
 {
+    int count;
     String *temp;
     String *tostring = newString("");
     tostring->appendChar(tostring, &this->symbol);
@@ -27,32 +28,39 @@ String *logToString(Log *this)
     temp->appendInt(temp, this->population);
     temp->trim(temp);
 
-    int s = 3 + SPACING - temp->len; // spacing between population and food stock
-    tostring->appendStr(tostring, newMultiplyString(" ", s));
-
+    count = 3 + SPACING - temp->len; // spacing between population and food stock
     temp->destroy(temp);
+    temp = newMultiplyString(" ", count);
+    tostring->appendStr(tostring, temp);
+
     temp = newString("");
     temp->appendInt(temp, this->foodStock);
     temp->trim(temp);
-    s = SPACING - temp->len; // spacing between food stock and victory
+    count = SPACING - temp->len; // spacing between food stock and victory
+    temp->destroy(temp);
+    temp = newMultiplyString(" ", count);
 
     tostring->appendInt(tostring, this->foodStock);
-    tostring->appendStr(tostring, newMultiplyString(" ", s));
+    tostring->appendStr(tostring, temp);
 
     temp->destroy(temp);
     temp = newString("");
     temp->appendInt(temp, this->victory);
     temp->trim(temp);
-    s = 8 - temp->len; // spacing between victory and loose
+    count = 8 - temp->len; // spacing between victory and loose
+    temp->destroy(temp);
+    temp = newMultiplyString(" ", count);
 
     tostring->appendInt(tostring, this->victory);
-    tostring->appendStr(tostring, newMultiplyString(" ", s));
-
-    temp->destroy(temp); // temp DESTROYYYYEDDDD
+    tostring->appendStr(tostring, temp);
 
     tostring->appendInt(tostring, this->loose);
+
     this->str = tostring;
     tostring->trim(tostring);
+
+    // temp->destroy(temp); // ???????????
+
     return tostring;
 }
 
