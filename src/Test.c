@@ -72,13 +72,17 @@ int main(int argc, char *argv[])
     // GAME TEST
     int q = 54;
     int p = 49;
-    ArrayList *populations = createArrayList(4, INT);
+    int g = 45;
+    int y = 67;
+    ArrayList *populations = createArrayList(10, INT);
     populations->append(populations, &q);
     populations->append(populations, &p);
+    populations->append(populations, &g);
+    populations->append(populations, &y);
     Game *game = newGame(populations);
     game->play(game);
 
-    // UI TEST
+    // UI TEST DONE
     Ui *ui = newUi();
     ui->show(ui, game->toursLogPack);
     ui->destroy(ui);
