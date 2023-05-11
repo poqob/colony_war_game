@@ -1,5 +1,6 @@
 #if !defined(LOG)
 #define LOG
+#define SPACING 14
 #include "../colony/Colony.h"
 
 typedef struct Log Log;

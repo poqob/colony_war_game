@@ -16,17 +16,43 @@ Log *newLog(Colony *colony)
 
 String *logToString(Log *this)
 {
+    String *temp;
     String *tostring = newString("");
     tostring->appendChar(tostring, &this->symbol);
-    tostring->appendChar(tostring, "\t     ");
+    tostring->appendStr(tostring, newMultiplyString(" ", SPACING - 4));
     tostring->appendInt(tostring, this->population);
-    tostring->appendChar(tostring, "\t              ");
+
+    // to calculate population's digits. by .len() method <--- i made it babyyyy....
+    temp = newString("");
+    temp->appendInt(temp, this->population);
+    temp->trim(temp);
+
+    int s = 3 + SPACING - temp->len; // spacing between population and food stock
+    tostring->appendStr(tostring, newMultiplyString(" ", s));
+
+    temp->destroy(temp);
+    temp = newString("");
+    temp->appendInt(temp, this->foodStock);
+    temp->trim(temp);
+    s = SPACING - temp->len; // spacing between food stock and victory
+
     tostring->appendInt(tostring, this->foodStock);
-    tostring->appendChar(tostring, "\t    ");
+    tostring->appendStr(tostring, newMultiplyString(" ", s));
+
+    temp->destroy(temp);
+    temp = newString("");
+    temp->appendInt(temp, this->victory);
+    temp->trim(temp);
+    s = 8 - temp->len; // spacing between victory and loose
+
     tostring->appendInt(tostring, this->victory);
-    tostring->appendChar(tostring, "\t   ");
+    tostring->appendStr(tostring, newMultiplyString(" ", s));
+
+    temp->destroy(temp); // temp DESTROYYYYEDDDD
+
     tostring->appendInt(tostring, this->loose);
     this->str = tostring;
+    tostring->trim(tostring);
     return tostring;
 }
 
