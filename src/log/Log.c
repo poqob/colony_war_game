@@ -18,18 +18,24 @@ String *logToString(Log *this)
 {
     String *tostring = newString("");
     tostring->appendChar(tostring, &this->symbol);
-    tostring->appendChar(tostring, "\t\t");
+    tostring->appendChar(tostring, "\t     ");
     tostring->appendInt(tostring, this->population);
-    tostring->appendChar(tostring, "\t\t");
+    tostring->appendChar(tostring, "\t              ");
     tostring->appendInt(tostring, this->foodStock);
-    tostring->appendChar(tostring, "\t\t");
+    tostring->appendChar(tostring, "\t    ");
     tostring->appendInt(tostring, this->victory);
-    tostring->appendChar(tostring, "\t\t");
+    tostring->appendChar(tostring, "\t   ");
     tostring->appendInt(tostring, this->loose);
+    this->str = tostring;
     return tostring;
 }
 
 void logDestroy(Log *this)
 {
+    if (this->str != NULL)
+    {
+        this->str->destroy(this->str);
+    }
+
     free(this);
 }
