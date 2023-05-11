@@ -28,10 +28,11 @@ String *logToString(Log *this)
     temp->appendInt(temp, this->population);
     temp->trim(temp);
 
-    count = 3 + SPACING - temp->len; // spacing between population and food stock
+    count = 2 + SPACING - temp->len; // spacing between population and food stock
     temp->destroy(temp);
     temp = newMultiplyString(" ", count);
     tostring->appendStr(tostring, temp);
+    temp->destroy(temp);
 
     temp = newString("");
     temp->appendInt(temp, this->foodStock);
@@ -41,6 +42,7 @@ String *logToString(Log *this)
     temp = newMultiplyString(" ", count);
 
     tostring->appendInt(tostring, this->foodStock);
+    temp->trim(temp);
     tostring->appendStr(tostring, temp);
 
     temp->destroy(temp);
@@ -52,12 +54,12 @@ String *logToString(Log *this)
     temp = newMultiplyString(" ", count);
 
     tostring->appendInt(tostring, this->victory);
+    tostring->trim(tostring);
     tostring->appendStr(tostring, temp);
 
     tostring->appendInt(tostring, this->loose);
-
+    // tostring->trim(tostring);
     this->str = tostring;
-    tostring->trim(tostring);
 
     // temp->destroy(temp); // ???????????
 
