@@ -70,8 +70,8 @@ int main(int argc, char *argv[])
     }
 
     // GAME TEST
-    int q = 21;
-    int p = 35;
+    int q = 54;
+    int p = 49;
     ArrayList *populations = createArrayList(4, INT);
     populations->append(populations, &q);
     populations->append(populations, &p);
@@ -96,12 +96,16 @@ int main(int argc, char *argv[])
 
     // STRING TEST
     String *noerr = newString("\nno error.");
-    String *trol = newString("\ntrol.");
+    String *trol = newMultiplyString("\nkaligula", 3);
     noerr->appendStr(noerr, trol);
     noerr->appendInt(noerr, q);
-    noerr->appendChar(noerr, "\n@@@\n");
-    printf(noerr->str);
+    noerr->appendChar(noerr, "    ");
+    printf("\nTRIM ONCESI UZUNLUK: %d\nMETIN:%s", noerr->len, noerr->str);
+    noerr->trim(noerr);
+    printf("\nTRIM SONRASI UZUNLUK: %d\nMETIN:%s", noerr->len, noerr->str);
+
     noerr->destroy(noerr);
     trol->destroy(trol);
+
     return 0;
 }

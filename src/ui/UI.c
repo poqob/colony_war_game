@@ -30,6 +30,7 @@ void uiShow(Ui *screen, ArrayList *listOfLogsList)
             log = ((Log *)logs->get(logs, j));
             ptr->appendChar(ptr, "\n  ");
             ptr->appendStr(ptr, log->toString(log));
+            // printf("\n%s", log->toString(log)->str);
         }
     }
     ptr->appendStr(ptr, screen->divider);
@@ -38,6 +39,7 @@ void uiShow(Ui *screen, ArrayList *listOfLogsList)
     printf("%s", ptr->str);
 }
 
+// TODO: memory error.
 void uiDestroy(Ui *screen)
 {
     screen->output->destroy(screen->output);
