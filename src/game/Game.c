@@ -222,6 +222,7 @@ void destroyGame(Game *this)
     Log *log;        // temp log
     int i, j;        // loop variables
 
+    // Destroy logs
     // roam through the this->toursLogPack which stores arraylists for each tour logs.
     for (i = 0; i < this->toursLogPack->size; i++)
     {

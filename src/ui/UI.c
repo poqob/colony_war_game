@@ -6,6 +6,7 @@ Ui *newUi()
     this->show = &uiShow;
     this->output = newString("");
     this->divider = newString("\n-------------------------------------------------------");
+    this->destroy = &uiDestroy;
     return this;
 }
 
@@ -39,10 +40,11 @@ void uiShow(Ui *screen, ArrayList *listOfLogsList)
     printf("%s", ptr->str);
 }
 
-// TODO: memory error.
 void uiDestroy(Ui *screen)
 {
-    screen->output->destroy(screen->output);
+    if (screen->output->str != NULL)
+        screen->output->destroy(screen->output);
+
     screen->divider->destroy(screen->divider);
     free(screen);
 }
