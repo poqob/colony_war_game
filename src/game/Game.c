@@ -104,7 +104,9 @@ void aVSb(Colony *c0, Colony *c1)
             }
         }
     }
-    // above results: populations affected, foodstocks transfared.
+    c0->reportLifeStatus(c0);
+    c1->reportLifeStatus(c1);
+    // above results: populations affected, foodstocks transfared, amIAlive updated
 }
 
 // local function --private
@@ -122,13 +124,18 @@ void combatOrganizer(ArrayList *cols)
     for (i = 0; i < cols->size - 1; i++)
     {
         c0 = ((Colony *)cols->get(cols, i));
+        // controll c0 is alive
         if (c0->amIALive != true)
             continue;
         for (j = i + 1; j < cols->size; j++)
         {
             c1 = ((Colony *)cols->get(cols, j));
+            // controll c1 is alive
             if (c1->amIALive != true)
                 continue;
+            // The situation where 'c0' did not survive the combat with the previous colonies.
+            if (c0->amIALive != true)
+                break;
             aVSb(c0, c1); // FIGHTTTTTT
         }
     }
@@ -210,17 +217,16 @@ void gamePlay(Game *game)
         game->totalWarCount += warCount;
         game->tour++;
 
-        combatOrganizer(game->colonies); // WORKS FINE
-
-        game->toursLogPack->append(game->toursLogPack, logger(game->colonies));
-        growOrganizer(game->colonies); // WORKS FINE
+        combatOrganizer(game->colonies);                                        // WORKS FINE
+        growOrganizer(game->colonies);                                          // WORKS FINE
+        game->toursLogPack->append(game->toursLogPack, logger(game->colonies)); // LOOGING
 
         warCount = calculatePossibleWarCountPerRound(game->colonies);
         isThereMoreThanOneColonyALive = (warCount != 0) ? true : false;
         dprinter->print("tour: ", CHAR);
-        dprinter->print(game->tour, INT);
+        dprinter->print(&game->tour, INT);
         dprinter->print(" possible wars: ", CHAR);
-        dprinter->print(warCount, INT);
+        dprinter->print(&warCount, INT);
         dprinter->println(" ", CHAR);
     }
     dprinter->destroy(dprinter);
