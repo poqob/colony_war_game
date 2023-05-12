@@ -7,21 +7,19 @@
 #include "../log/Log.h"
 #include "../utils/DebugPrinter.h"
 #include <time.h>
+#include "GameManager.h"
 
 typedef struct Game Game;
 
 struct Game
 {
-    ArrayList *colonies;
-    int totalWarCount;
-    int tour;
-    ArrayList *toursLogPack;
+    GameManager *gm;
     void (*inspect)(Game *);
     void (*destroy)(Game *);
     void (*play)(Game *);
 };
 
-Game *newGame(ArrayList *populations);
+Game *newGame(GameManager *);
 void destroyGame(Game *game);
 void gameInspect(Game *game);
 void gamePlay(Game *game);
