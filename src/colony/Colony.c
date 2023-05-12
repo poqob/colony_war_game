@@ -1,7 +1,5 @@
 
 #include "../../include/colony/Colony.h"
-// TODO:
-// toString() method will be added.
 
 // local function --private
 int getFightPower(Colony *colony)
@@ -125,6 +123,7 @@ void destroyManufacture(Colony *colony)
     }
 }
 
+// constructor
 Colony *newColony(int population)
 {
     // allocate

@@ -23,7 +23,7 @@ struct Colony
     int foodStock;
     int population;
     boolean amIALive;
-    char symbol; // char code 1-21
+    char symbol;
     int victory;
     int loose;
     // If the toString method is called, a string data is stored in the memory.

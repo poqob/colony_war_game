@@ -5,6 +5,7 @@
 #include "../include/utils/ArrayList.h"
 #include "../include/Colony/Colony.h"
 #include "../include/utils/String.h"
+#include "../include/game/GameManager.h"
 #include "../include/game/Game.h"
 #include "../include/log/Log.h"
 #include "../include/ui/UI.h"
@@ -85,15 +86,20 @@ int main(int argc, char *argv[])
     populations->append(populations, &y);
     populations->append(populations, &v);
     populations->append(populations, &n);
-    Game *game = newGame(populations);
+
+    GameManager *gameManager = newGameManager(populations);
+    Game *game = newGame(gameManager);
     game->play(game);
 
     // UI TEST DONE
     Ui *ui = newUi();
-    ui->show(ui, game->toursLogPack);
+    ui->show(ui, game->gm->toursLogPack);
     ui->destroy(ui);
 
     game->destroy(game);
+    gameManager->destroy(gameManager);
+    populations->destroyArrayList(populations);
+
     // DEBUGPRINTER TEST
     DebugPrinter *dprinter = newDebugPrinter();
     // LOG TEST
@@ -106,7 +112,6 @@ int main(int argc, char *argv[])
     coll->destroyColony(coll);
 
     // WHICH CHARACTERS ARE PRINTABLE TEST
-
     dprinter = newDebugPrinter();
     int ii;
     char cc;
@@ -121,7 +126,7 @@ int main(int argc, char *argv[])
     }
     dprinter->destroy(dprinter);
 
-    // STRING TEST
+     // STRING TEST
     String *noerr = newString("\nno error.");
     String *trol = newMultiplyString("\nkaligula", 3);
     noerr->appendStr(noerr, trol);

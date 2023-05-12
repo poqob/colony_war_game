@@ -27,9 +27,10 @@ compile:
 
 	gcc -I ./include/ui -o ./lib/UI.o -c ./src/ui/UI.c
 
+	gcc -I ./include/game -o ./lib/GameManager.o -c ./src/game/GameManager.c
 	gcc -I ./include/game -o ./lib/Game.o -c ./src/game/Game.c
 
-	gcc -I ./include -o ./bin/Test ./lib/ArrayList.o ./lib/Bool.o ./lib/DataType.o ./lib/String.o ./lib/AStrategy.o ./lib/Strategy0.o ./lib/Strategy1.o ./lib/Strategy2.o ./lib/Strategies.o ./lib/AManufacture.o ./lib/Manufacture0.o ./lib/Manufacture1.o ./lib/Manufacture2.o ./lib/Manufactures.o ./lib/Colony.o ./lib/Log.o ./lib/DebugPrinter.o ./lib/UI.o ./lib/Game.o ./src/Test.c
+	gcc -I ./include -o ./bin/Test ./lib/ArrayList.o ./lib/Bool.o ./lib/DataType.o ./lib/String.o ./lib/AStrategy.o ./lib/Strategy0.o ./lib/Strategy1.o ./lib/Strategy2.o ./lib/Strategies.o ./lib/AManufacture.o ./lib/Manufacture0.o ./lib/Manufacture1.o ./lib/Manufacture2.o ./lib/Manufactures.o ./lib/Colony.o ./lib/Log.o ./lib/DebugPrinter.o ./lib/UI.o ./lib/GameManager.o ./lib/Game.o ./src/Test.c
 
 run:
 	./bin/Test 13 24

@@ -4,8 +4,5 @@ think:  create a function, the fun. shall return propper symbol character from a
 
 cozum: oyun icinde oyuncu yarat foksiyonu rastgele basilabilir karakter secimi yapsin. secilen karakterler saklansin. ayni karakterler secilemez!
 
-GAME
+GAME MANAGER 
 todo: dedect winner.
-
-// TODO: bind logger to a local function(method) in Game.c
-
