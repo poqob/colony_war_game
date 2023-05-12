@@ -26,6 +26,9 @@ struct Colony
     char symbol; // char code 1-21
     int victory;
     int loose;
+    // If the toString method is called, a string data is stored in the memory.
+    // 'str' is a variable created to store the address of this created string and to perform its destruction.
+    String *str;
 
     void *strategy;
     enum Strategies strategyType; // stores which strategy struct picked.
@@ -36,6 +39,7 @@ struct Colony
     void (*destroyColony)(Colony *);
     void (*grow)(Colony *);
     String *(*toString)(Colony *);
+    void (*reportLifeStatus)(Colony *);
 
     int fightPower;
     int manufacturePower;
@@ -45,5 +49,6 @@ Colony *newColony(int);
 void destroyColony(Colony *);
 void colonyGrow(Colony *);
 String *toStringColony(Colony *);
+void colonyDeadControll(Colony *);
 
 #endif // COLONY

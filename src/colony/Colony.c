@@ -153,6 +153,8 @@ Colony *newColony(int population)
     this->grow = &colonyGrow;
 
     this->toString = &toStringColony;
+
+    this->reportLifeStatus = &colonyDeadControll;
 }
 
 void colonyGrow(Colony *this)
@@ -200,8 +202,12 @@ void colonyGrow(Colony *this)
 
 void destroyColony(Colony *this)
 {
+    if (this->str != NULL)
+        this->str->destroy(this->str);
+
     destroyStrategy(this);
     destroyManufacture(this);
+
     free(this);
 }
 
@@ -261,5 +267,15 @@ String *toStringColony(Colony *this)
     output->appendInt(output, this->loose);
     output->appendChar(output, "\n***************************\n");
 
+    this->str = output;
     return output;
+}
+
+void colonyDeadControll(Colony *this)
+{
+    // controlling if food stock is under level zero.
+    if (this->foodStock <= 0 || this->population <= 0)
+    {
+        this->amIALive = false;
+    }
 }
