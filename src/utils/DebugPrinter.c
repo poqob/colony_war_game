@@ -19,16 +19,15 @@ void printDebugPrinter(void *exprassion, DataType dataType)
         printf("%s", ((char *)exprassion));
         break;
     case INT:
-        printf("%d", ((int *)exprassion));
+        printf("%d", *((int *)exprassion));
         break;
     case PTR:
         printf("void");
         break;
     case BOOL:
-        printf("%d", ((int *)exprassion));
+        printf("%d", *((int *)exprassion));
         break;
     case _COLONY:
-
         colony = ((Colony *)exprassion);
         printf("%s", colony->toString(colony)->str);
         break;
@@ -56,14 +55,14 @@ void printlnDebugPrinter(void *exprassion, DataType dataType)
         printf("%s\n", ((char *)exprassion));
         break;
     case INT:
-        printf("%d\n", ((int *)exprassion));
+        printf("%d\n", *((int *)exprassion));
         break;
 
     case PTR:
         printf("void\n");
         break;
     case BOOL:
-        printf("%d\n", ((int *)exprassion));
+        printf("%d\n", *((int *)exprassion));
         break;
     case _COLONY:
 
