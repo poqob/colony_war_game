@@ -2,14 +2,10 @@ COLONY
 todo:   colony random symbol attempt problem-> some of character between 0-30 are not printable.
 think:  create a function, the fun. shall return propper symbol character from a printable symbol char array.
 
+cozum: oyun icinde oyuncu yarat foksiyonu rastgele basilabilir karakter secimi yapsin. secilen karakterler saklansin. ayni karakterler secilemez!
 
 GAME
-todo:   tour number is incorret.
-think:  ??????
+todo: dedect winner.
 
 // TODO: bind logger to a local function(method) in Game.c
 
-ISSUE:
-GAME, aVsb: savaşlar serisinde ilk savaşinda populasyonu 0'lanabilecek bir koloni populasyon sayisi
- ilk savaşinda hiç eksilmiyormuş gibi başka savaşlara da katiliyor. Yallnizca kayip senaryosu incelenebilir
-// TODO: GAME:AVSB METODU INCELENSIN.

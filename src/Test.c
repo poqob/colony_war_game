@@ -70,15 +70,21 @@ int main(int argc, char *argv[])
     }
 
     // GAME TEST
+    int k = 127;
     int q = 54;
     int p = 49;
     int g = 47;
     int y = 67;
-    ArrayList *populations = createArrayList(10, INT);
+    int v = 278;
+    int n = 357;
+    ArrayList *populations = createArrayList(3, INT);
+    populations->append(populations, &k);
     populations->append(populations, &q);
     populations->append(populations, &p);
     populations->append(populations, &g);
     populations->append(populations, &y);
+    populations->append(populations, &v);
+    populations->append(populations, &n);
     Game *game = newGame(populations);
     game->play(game);
 
@@ -98,6 +104,22 @@ int main(int argc, char *argv[])
     dprinter->destroy(dprinter);
     log->destroy(log);
     coll->destroyColony(coll);
+
+    // WHICH CHARACTERS ARE PRINTABLE TEST
+
+    dprinter = newDebugPrinter();
+    int ii;
+    char cc;
+    for (ii = 0; ii < 50; ii++)
+    {
+        cc = ii;
+        dprinter->print("character ", CHAR);
+        dprinter->print(&ii, INT);
+        dprinter->print(" : ", CHAR);
+        dprinter->print(&cc, CHAR);
+        dprinter->println(" ", CHAR);
+    }
+    dprinter->destroy(dprinter);
 
     // STRING TEST
     String *noerr = newString("\nno error.");
