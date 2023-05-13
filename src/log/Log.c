@@ -21,44 +21,91 @@ String *logToString(Log *this)
     String *tostring = newString("");
     tostring->appendChar(tostring, &this->symbol);
     tostring->appendStr(tostring, newMultiplyString(" ", SPACING - 4));
-    tostring->appendInt(tostring, this->population);
 
-    // to calculate population's digits. by .len() method <--- i made it babyyyy....
-    temp = newString("");
-    temp->appendInt(temp, this->population);
-    temp->trim(temp);
+    if (this->amIALive == true)
+    {
+        tostring->appendInt(tostring, this->population);
 
-    count = 2 + SPACING - temp->len; // spacing between population and food stock
-    temp->destroy(temp);
-    temp = newMultiplyString(" ", count);
-    tostring->appendStr(tostring, temp);
-    temp->destroy(temp);
+        // to calculate population's digits. by .len() method <--- i made it babyyyy....
+        temp = newString("");
+        temp->appendInt(temp, this->population);
+        temp->trim(temp);
 
-    temp = newString("");
-    temp->appendInt(temp, this->foodStock);
-    temp->trim(temp);
-    count = SPACING - temp->len; // spacing between food stock and victory
-    temp->destroy(temp);
-    temp = newMultiplyString(" ", count);
+        count = 2 + SPACING - temp->len; // spacing between population and food stock
+        temp->destroy(temp);
+        temp = newMultiplyString(" ", count);
+        tostring->appendStr(tostring, temp);
+        temp->destroy(temp);
 
-    tostring->appendInt(tostring, this->foodStock);
-    temp->trim(temp);
-    tostring->appendStr(tostring, temp);
+        temp = newString("");
+        temp->appendInt(temp, this->foodStock);
+        temp->trim(temp);
+        count = SPACING - temp->len; // spacing between food stock and victory
+        temp->destroy(temp);
+        temp = newMultiplyString(" ", count);
 
-    temp->destroy(temp);
-    temp = newString("");
-    temp->appendInt(temp, this->victory);
-    temp->trim(temp);
-    count = 8 - temp->len; // spacing between victory and loose
-    temp->destroy(temp);
-    temp = newMultiplyString(" ", count);
+        tostring->appendInt(tostring, this->foodStock);
+        temp->trim(temp);
+        tostring->appendStr(tostring, temp);
 
-    tostring->appendInt(tostring, this->victory);
-    tostring->trim(tostring);
-    tostring->appendStr(tostring, temp);
+        temp->destroy(temp);
+        temp = newString("");
+        temp->appendInt(temp, this->victory);
+        temp->trim(temp);
+        count = 8 - temp->len; // spacing between victory and loose
+        temp->destroy(temp);
+        temp = newMultiplyString(" ", count);
 
-    tostring->appendInt(tostring, this->loose);
-    // tostring->trim(tostring);
+        tostring->appendInt(tostring, this->victory);
+        tostring->trim(tostring);
+        tostring->appendStr(tostring, temp);
+
+        tostring->appendInt(tostring, this->loose);
+        // tostring->trim(tostring);
+    }
+    else
+    {
+        tostring->appendChar(tostring, "--");
+
+        // to calculate population's digits. by .len() method <--- i made it babyyyy....
+        temp = newString("");
+        temp->appendChar(temp, "--");
+        temp->trim(temp);
+
+        count = 2 + SPACING - temp->len; // spacing between population and food stock
+        temp->destroy(temp);
+        temp = newMultiplyString(" ", count);
+        tostring->appendStr(tostring, temp);
+        temp->destroy(temp);
+
+        temp = newString("");
+        temp->appendChar(temp, "--");
+
+        temp->trim(temp);
+        count = SPACING - temp->len; // spacing between food stock and victory
+        temp->destroy(temp);
+        temp = newMultiplyString(" ", count);
+
+        tostring->appendChar(tostring, "--");
+        temp->trim(temp);
+        tostring->appendStr(tostring, temp);
+
+        temp->destroy(temp);
+        temp = newString("");
+        temp->appendChar(temp, "--");
+        temp->trim(temp);
+        count = 8 - temp->len; // spacing between victory and loose
+        temp->destroy(temp);
+        temp = newMultiplyString(" ", count);
+
+        tostring->appendChar(tostring, "--");
+        tostring->trim(tostring);
+        tostring->appendStr(tostring, temp);
+
+        tostring->appendChar(tostring, "--");
+        // tostring->trim(tostring);
+    }
+
     this->str = tostring;
 
     // temp->destroy(temp); // ???????????
