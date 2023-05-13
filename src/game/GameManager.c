@@ -20,26 +20,73 @@ GameManager *newGameManager(ArrayList *populations)
     this->populations = populations; // done
 
     this->SelectedSymbols = createArrayList(10, INT); // CHANGE
-
+    this->generateRandomSymbols(this);
     this->players = this->createPlayers(this);     // done
     this->toursLogPack = createArrayList(25, PTR); // done
 }
-int generateRandomSymbolsGm(ArrayList *selectedSymbolList) {}
 
+void *generateRandomSymbolsGm(GameManager *this)
+{
+    srand(time(NULL));
+    ArrayList *list = this->SelectedSymbols;
+    int *values = (int *)malloc(sizeof(int) * MAX_SYMBOL_COUNT);
+    time_t t;
+    int count = 0;
+    int tmp;
+    // generate printable characters and add to possibleValues list
+    int i;
+    int num;
+    for (i = 1; i < 6; i++)
+    {
+        values[count] = i;
+        count++;
+    }
+    for (i = 16; i < 26; i++)
+    {
+        values[count] = i;
+        count++;
+    }
+
+    for (i = 28; i < 31; i++)
+    {
+        values[count] = i;
+        count++;
+    }
+    for (i = 33; i < 47; i++)
+    {
+        values[count] = i;
+        count++;
+    }
+
+    // pick random characters from possibleValues, add to selected symbols list.
+    /* Intializes random number generator */
+    srand((unsigned)time(&t));
+    for (i = 0; i < this->populations->size; i++)
+    {
+        num = rand() % (count - 1);
+        list->append(list, &values[num]);
+    }
+    // list->display(list);
+}
+
+// creates players(colonies)
 ArrayList *createPlayersGm(GameManager *this)
 {
     // popoulations array list stores intager values
     ArrayList *players = createArrayList(this->populations->size, _COLONY);
     Colony *colony;
     int i;
+    int symbl;
     for (i = 0; i < this->populations->size; i++)
     {
-        colony = newColony(*(int *)this->populations->get(this->populations, i));
+        //  printf("%d\n", *(int *)this->SelectedSymbols->get(this->SelectedSymbols, i));
+        colony = newColony(*(int *)this->populations->get(this->populations, i), *(int *)this->SelectedSymbols->get(this->SelectedSymbols, i)); // *(int *)this->SelectedSymbols->get(this->SelectedSymbols, i)
         players->append(players, colony);
     }
     return players;
 }
 
+// creates logs for each tour
 ArrayList *loggerGm(ArrayList *colonies)
 {
     // DebugPrinter *dprinter = newDebugPrinter();
@@ -55,7 +102,6 @@ ArrayList *loggerGm(ArrayList *colonies)
         // dprinter->println(log, _LOG);
         logs->append(logs, log);
     }
-
     return logs;
 }
 
@@ -80,6 +126,7 @@ int calculatePossibleWarCountPerRoundGm(ArrayList *colonies)
         return (colonyCount / 2) * colonyCount;
 }
 
+// called after every battle series (tour), grows colonies population and expands food stock.
 void growOrganizerGm(ArrayList *players)
 {
     Colony *col;
@@ -91,6 +138,7 @@ void growOrganizerGm(ArrayList *players)
     }
 }
 
+// colonies battle function
 void battleGm(GameManager *this)
 {
     Colony *c0;
@@ -117,6 +165,7 @@ void battleGm(GameManager *this)
     }
 }
 
+// combat-fight function
 void versusGm(Colony *c0, Colony *c1)
 {
     // combat forces ratio ~ population ratio
@@ -209,6 +258,7 @@ void versusGm(Colony *c0, Colony *c1)
     // above results: populations affected, foodstocks transfared, amIAlive updated
 }
 
+// destructor
 void destroyGameManager(GameManager *this)
 {
     /*WILL BE CLEARED

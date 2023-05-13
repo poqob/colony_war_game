@@ -47,7 +47,7 @@ int main(int argc, char *argv[])
     list->destroyArrayList(list);
 
     // TODO: create colony according to mock data. DONE
-    Colony *colony = newColony(mock);
+    Colony *colony = newColony(mock, 35);
 
     printf("\n%s\n", colony->toString(colony)->str);
 
@@ -102,17 +102,7 @@ int main(int argc, char *argv[])
 
     // DEBUGPRINTER TEST
     DebugPrinter *dprinter = newDebugPrinter();
-    // LOG TEST
-    Colony *coll = newColony(98);
-    Log *log = newLog(coll);
-    dprinter->println("\n\nTEST LOG", CHAR);
-    dprinter->println(log, _LOG);
-    dprinter->destroy(dprinter);
-    log->destroy(log);
-    coll->destroyColony(coll);
 
-    // WHICH CHARACTERS ARE PRINTABLE TEST
-    dprinter = newDebugPrinter();
     int ii;
     char cc;
     for (ii = 0; ii < 50; ii++)
@@ -126,7 +116,7 @@ int main(int argc, char *argv[])
     }
     dprinter->destroy(dprinter);
 
-     // STRING TEST
+    // STRING TEST
     String *noerr = newString("\nno error.");
     String *trol = newMultiplyString("\nkaligula", 3);
     noerr->appendStr(noerr, trol);

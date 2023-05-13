@@ -6,3 +6,5 @@ cozum: oyun icinde oyuncu yarat foksiyonu rastgele basilabilir karakter secimi y
 
 GAME MANAGER 
 todo: dedect winner.
+
+ARRAYLIST Display method: add suport to other types exmpl, logs, colonies, ...

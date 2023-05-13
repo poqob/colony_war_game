@@ -1,13 +1,15 @@
 #if !defined(GAMEMANAGER)
 #define GAMEMANAGER
-
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include "../colony/Colony.h"
 #include "../utils/String.h"
 #include "../utils/Bool.h"
 #include "../utils/ArrayList.h"
 #include "../log/Log.h"
 #include "../utils/DebugPrinter.h"
-#include <time.h>
+#define MAX_SYMBOL_COUNT 40
 typedef struct GameManager GameManager;
 struct GameManager
 {
@@ -25,7 +27,7 @@ struct GameManager
     ArrayList *(*logger)(ArrayList *);
     int (*calculatePossibleWarCountPerRound)(ArrayList *); // players
     void (*growOrganizer)(ArrayList *);                    // players
-    int (*generateRandomSymbols)(ArrayList *);             // this selected symbols arraylist
+    void *(*generateRandomSymbols)(GameManager *);         // this selected symbols arraylist
     void (*battle)(GameManager *);                         // this
     void (*versus)(Colony *, Colony *);
 };
@@ -36,7 +38,7 @@ ArrayList *createPlayersGm(GameManager *);            // game manager
 void destroyGameManager(GameManager *);               // this game manager
 ArrayList *loggerGm(ArrayList *);                     // players
 int calculatePossibleWarCountPerRoundGm(ArrayList *); // players
-int generateRandomSymbolsGm(ArrayList *);             // this selected symbols arraylist
+void *generateRandomSymbolsGm(GameManager *);         // this selected symbols arraylist
 void battleGm(GameManager *);                         // this
 void versusGm(Colony *, Colony *);
 
