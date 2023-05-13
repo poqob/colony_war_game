@@ -5,7 +5,6 @@
 #include "../utils/Bool.h"
 #include "../utils/ArrayList.h"
 #include "../log/Log.h"
-#include "../utils/DebugPrinter.h"
 #include <time.h>
 #include "GameManager.h"
 

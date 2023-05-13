@@ -12,7 +12,7 @@ Game *newGame(GameManager *gameManager)
 };
 void gamePlay(Game *game)
 {
-    DebugPrinter *dprinter = newDebugPrinter();
+
     int warCount = game->gm->calculatePossibleWarCountPerRound(game->gm->players);
     boolean isThereMoreThanOneColonyALive = (warCount != 0) ? true : false;
     while (isThereMoreThanOneColonyALive == true)
@@ -29,13 +29,7 @@ void gamePlay(Game *game)
 
         warCount = game->gm->calculatePossibleWarCountPerRound(game->gm->players);
         isThereMoreThanOneColonyALive = (warCount != 0) ? true : false;
-        dprinter->print("tour: ", CHAR);
-        dprinter->print(&game->gm->tour, INT);
-        dprinter->print(" possible wars: ", CHAR);
-        dprinter->print(&warCount, INT);
-        dprinter->println(" ", CHAR);
     }
-    dprinter->destroy(dprinter);
 };
 
 void gameInspect(Game *game)
