@@ -6,5 +6,3 @@ ARRAYLIST Display method: add suport to other types exmpl, logs, colonies, ...
 
 Log
 olenleri "--" seklinde ifade et.
-
-Code a input handler. it will return an ArrayList named population.
