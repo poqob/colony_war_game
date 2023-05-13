@@ -1,6 +1,8 @@
 COLONY
-todo:   colony random symbol attempt problem-> some of character between 0-30 are not printable.
-think:  create a function, the fun. shall return propper symbol character from a printable symbol char array.
+todo:   colony random symbol attempt problem
+izzus: sometimes same chars occurs.look for game manager: void *generateRandomSymbolsGm(GameManager *this)
+
+ 
 
 cozum: oyun icinde oyuncu yarat foksiyonu rastgele basilabilir karakter secimi yapsin. secilen karakterler saklansin. ayni karakterler secilemez!
 

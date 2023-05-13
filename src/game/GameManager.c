@@ -29,7 +29,7 @@ void *generateRandomSymbolsGm(GameManager *this)
 {
     srand(time(NULL));
     ArrayList *list = this->SelectedSymbols;
-    int *values = (int *)malloc(sizeof(int) * MAX_SYMBOL_COUNT);
+    int *values = (int *)malloc(sizeof(int) * MAX_SYMBOL_COUNT); // carry out
     time_t t;
     int count = 0;
     int tmp;
@@ -61,11 +61,33 @@ void *generateRandomSymbolsGm(GameManager *this)
     // pick random characters from possibleValues, add to selected symbols list.
     /* Intializes random number generator */
     srand((unsigned)time(&t));
-    for (i = 0; i < this->populations->size; i++)
+
+    boolean doesContain = false;
+    while (1)
     {
         num = rand() % (count - 1);
+
+        for (i = 0; i < list->size; i++)
+        {
+            if (num == *(int *)list->array[i])
+            {
+                printf("CONTAIN\n");
+                doesContain = true;
+                break;
+            }
+        }
+        if (doesContain == true)
+        {
+            doesContain = false;
+            continue;
+        }
+
         list->append(list, &values[num]);
+
+        if (list->size == this->populations->size)
+            break;
     }
+
     // list->display(list);
 }
 
