@@ -14,7 +14,7 @@ InputManager *newInputManager(int argc, char *argv[])
             continue; // -- first argument is 0
 
         this->numericArgs[i - 1] = atoi(argv[i]);
-        printf("--%d\n", this->numericArgs[i - 1]);
+        // printf("--%d\n", this->numericArgs[i - 1]);
         this->populations->append(this->populations, &this->numericArgs[i - 1]);
     }
     // this->populations->display(this->populations);
