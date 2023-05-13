@@ -1,5 +1,6 @@
 #if !defined(STRATEGY1)
 #define STRATEGY1
+#define S1FP 800 // strategy1 fight power
 
 #include "AStrategy.h"
 typedef struct Strategy1 Strategy1;

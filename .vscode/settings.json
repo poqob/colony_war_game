@@ -16,6 +16,7 @@
         "type_traits": "c",
         "log.h": "c",
         "utility": "c",
-        "debugprinter.h": "c"
+        "debugprinter.h": "c",
+        "amanufacture.h": "c"
     }
 }

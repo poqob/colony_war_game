@@ -14,4 +14,4 @@ void destroyManufacture0(Manufacture0 *this)
     this->super->destroy(this->super);
     free(this);
 };
-int produceManufacture0() { return 9; };
+int produceManufacture0() { return M0PP; };

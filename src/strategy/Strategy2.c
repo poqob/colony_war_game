@@ -1,6 +1,4 @@
 #include "Strategy2.h"
-#include <stdlib.h>
-#include <time.h>
 
 Strategy2 *newStrategy2()
 {
@@ -16,8 +14,7 @@ Strategy2 *newStrategy2()
 
 int fightStrategy2()
 {
-    srand(time(NULL)); // Seed the random number generator with the current time
-    return 900;        // rand() % 1001; // Generate a random number between 0 and 1000
+    return S2FP;
 }
 
 void destroyStrategy2(Strategy2 *strategy)

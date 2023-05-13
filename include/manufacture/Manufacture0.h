@@ -1,5 +1,6 @@
 #if !defined(MANUFACTURE0)
 #define MANUFACTURE0
+#define M0PP 9 // manufature 0 produce power
 #include "AManufacture.h"
 
 typedef struct Manufacture0 Manufacture0;

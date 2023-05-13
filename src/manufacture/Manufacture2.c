@@ -15,5 +15,5 @@ void destroyManufacture2(Manufacture2 *this)
 };
 int produceManufacture2()
 {
-    return 4;
+    return M2PP;
 };
