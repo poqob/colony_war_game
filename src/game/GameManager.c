@@ -65,13 +65,13 @@ void *generateRandomSymbolsGm(GameManager *this)
     boolean doesContain = false;
     while (1)
     {
-        num = rand() % (count - 1);
+        num = rand() % (count);
 
         for (i = 0; i < list->size; i++)
         {
-            if (num == *(int *)list->array[i])
+            if (values[num] == *(int *)list->array[i])
             {
-                printf("CONTAIN\n");
+                // printf("CONTAIN\n");
                 doesContain = true;
                 break;
             }
@@ -81,14 +81,16 @@ void *generateRandomSymbolsGm(GameManager *this)
             doesContain = false;
             continue;
         }
-
-        list->append(list, &values[num]);
+        else
+        {
+            list->append(list, &values[num]);
+        }
 
         if (list->size == this->populations->size)
             break;
     }
-
-    // list->display(list);
+    //    list->display(list);
+    this->allSymbols = values;
 }
 
 // creates players(colonies)
@@ -288,8 +290,15 @@ void destroyGameManager(GameManager *this)
     ArrayList *players;
     ArrayList *toursLogPack;
     ArrayList *populations; destroy at out of gm
+    int * allSymbols
     */
     ArrayList *temp;
+
+    // to destroy all symbols array
+    if (this->allSymbols != NULL)
+    {
+        free(this->allSymbols);
+    }
 
     // to destroy selected symbols arraylist
     if (this->SelectedSymbols != NULL)

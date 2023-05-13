@@ -18,13 +18,14 @@ struct GameManager
     ArrayList *players;
     ArrayList *toursLogPack;
     ArrayList *populations;
+    int *allSymbols;
     int totalWarCount;
     int tour;
 
     // methods
     ArrayList *(*createPlayers)(GameManager *);
-    void (*destroy)(GameManager *);
     ArrayList *(*logger)(ArrayList *);
+    void (*destroy)(GameManager *);
     int (*calculatePossibleWarCountPerRound)(ArrayList *); // players
     void (*growOrganizer)(ArrayList *);                    // players
     void *(*generateRandomSymbols)(GameManager *);         // this selected symbols arraylist

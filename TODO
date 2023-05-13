@@ -1,12 +1,8 @@
-COLONY
-todo:   colony random symbol attempt problem
-izzus: sometimes same chars occurs.look for game manager: void *generateRandomSymbolsGm(GameManager *this)
-
- 
-
-cozum: oyun icinde oyuncu yarat foksiyonu rastgele basilabilir karakter secimi yapsin. secilen karakterler saklansin. ayni karakterler secilemez!
 
 GAME MANAGER 
 todo: dedect winner.
 
 ARRAYLIST Display method: add suport to other types exmpl, logs, colonies, ...
+
+Log
+olenleri "--" seklinde ifade et.
