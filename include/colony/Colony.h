@@ -45,7 +45,7 @@ struct Colony
     int manufacturePower;
 };
 
-Colony *newColony(int);
+Colony *newColony(int, int);
 void destroyColony(Colony *);
 void colonyGrow(Colony *);
 String *toStringColony(Colony *);
