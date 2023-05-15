@@ -1,36 +1,40 @@
 #include "../../include/utils/String.h"
 
-// add them to prevent compile time warnings(not error).
+// i added them to prevent compile time warnings(not error).
 size_t strlen(const char *s);
 char *strcpy(char *dest, const char *src);
 void *strcat(char *dest, const char *src);
 
+// constructor
 String *newString(char *s)
 {
-    String *str = malloc(sizeof(String));
-    str->len = strlen(s);
-    str->str = malloc(str->len + 1);
-    strcpy(str->str, s);
-    str->destroy = &destroyString;
-    str->getSize = &getStringSize;
-    str->appendStr = &appendString;
-    str->appendInt = &appendIntager;
-    str->appendChar = &appendCharacterArray;
-    str->trim = &trimString;
-    return str;
+    String *this = malloc(sizeof(String));
+    this->len = strlen(s);
+    this->str = malloc(this->len + 1);
+    strcpy(this->str, s);
+    this->destroy = &destroyString;
+    this->getSize = &getStringSize;
+    this->appendStr = &appendString;
+    this->appendInt = &appendIntager;
+    this->appendChar = &appendCharacterArray;
+    this->trim = &trimString;
+    return this;
 }
 
+// destructor
 void destroyString(String *str)
 {
     free(str->str);
     free(str);
 }
 
+// to obtain size of string
 int getStringSize(String *str)
 {
     return (str->len / sizeof(char)) + 1;
 }
 
+// string append function to a string
 void appendString(String *this, String *str)
 {
     this->len += strlen(str->str) + 1;         // update lenght of string
@@ -38,6 +42,7 @@ void appendString(String *this, String *str)
     strcat(this->str, str->str);               // add new characters.
 }
 
+// intager append to a string function
 // Use trim. Normally, str's length is 10 characters, even though val's length is not.
 void appendIntager(String *this, int val)
 {
@@ -49,6 +54,7 @@ void appendIntager(String *this, int val)
     strcat(this->str, str);                    // add new characters.
 }
 
+// char* append to a String exprassion function
 void appendCharacterArray(String *this, char *val)
 {
     this->len += strlen(val) + 1;              // update lenght of string
@@ -56,6 +62,7 @@ void appendCharacterArray(String *this, char *val)
     strcat(this->str, val);                    // add new characters.
 }
 
+// trim method
 String *trimString(String *this)
 {
     int newlen = 0;
@@ -92,6 +99,11 @@ String *trimString(String *this)
     return this;
 }
 
+// create multipled string.
+/*
+String* test= newMultiplyString("zort", 3);
+assert(test->str=="zortzortzort"); true
+*/
 String *newMultiplyString(char *chararr, int count)
 {
     String *multiple;

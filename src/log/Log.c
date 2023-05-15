@@ -1,5 +1,6 @@
 #include "../../include/log/Log.h"
 
+// Constructor of Log
 Log *newLog(Colony *colony)
 {
     Log *this = (Log *)malloc(sizeof(Log)); // allocate
@@ -14,6 +15,8 @@ Log *newLog(Colony *colony)
     return this;
 }
 
+// The most important method :D Log's main purpose is providing data about the colony to user-console.
+// output shall be like if colony is alive then contains data about colony if not only contains "--" for every column.
 String *logToString(Log *this)
 {
     int count;
@@ -113,12 +116,12 @@ String *logToString(Log *this)
     return tostring;
 }
 
+// destructor
 void logDestroy(Log *this)
 {
+    // destructure of  Log's str variable. (if Log's toString() method called and a result created on memory.)
     if (this->str != NULL)
-    {
         this->str->destroy(this->str);
-    }
-
+    // destruction of Log structure
     free(this);
 }

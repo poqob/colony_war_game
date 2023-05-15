@@ -17,6 +17,8 @@
         "log.h": "c",
         "utility": "c",
         "debugprinter.h": "c",
-        "amanufacture.h": "c"
+        "amanufacture.h": "c",
+        "bool.h": "c",
+        "game.h": "c"
     }
 }

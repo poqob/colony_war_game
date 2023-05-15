@@ -1,5 +1,6 @@
 #include "../../include/ui/UI.h"
 
+// constructor
 Ui *newUi()
 {
     Ui *this = (Ui *)malloc(sizeof(Ui));
@@ -9,6 +10,9 @@ Ui *newUi()
     this->destroy = &uiDestroy;
     return this;
 }
+
+// prints proper output(to sabis document) to screen.
+// takes two parameter one of them is screen (Ui) object other one is The list of Log structures produced by GameManager.
 
 void uiShow(Ui *screen, ArrayList *listOfLogsList)
 {
@@ -39,11 +43,11 @@ void uiShow(Ui *screen, ArrayList *listOfLogsList)
     printf("%s", ptr->str);
 }
 
+// destructor
 void uiDestroy(Ui *screen)
 {
     if (screen->output->str != NULL)
         screen->output->destroy(screen->output);
-
     screen->divider->destroy(screen->divider);
     free(screen);
 }

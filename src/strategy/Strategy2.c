@@ -1,5 +1,6 @@
 #include "Strategy2.h"
 
+// constructor
 Strategy2 *newStrategy2()
 {
     Strategy2 *this = (Strategy2 *)malloc(sizeof(Strategy2));
@@ -10,13 +11,13 @@ Strategy2 *newStrategy2()
     this->fight = this->super->fight;
 
     this->destroy = &destroyStrategy2;
+    return this;
 }
 
-int fightStrategy2()
-{
-    return S2FP;
-}
+// the fight(combat) method of Strategy2
+int fightStrategy2() { return S2FP; }
 
+// destructor
 void destroyStrategy2(Strategy2 *strategy)
 {
     if (strategy == NULL)

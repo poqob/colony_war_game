@@ -1,12 +1,15 @@
 #include "../../include/utils/InputManager.h"
 
+// constructor
 InputManager *newInputManager(int argc, char *argv[])
 {
+    // attemps
     InputManager *this = (InputManager *)malloc(sizeof(InputManager));
     this->destroy = &destroyInputManager;
     this->numericArgs = (int *)malloc(sizeof(int) * argc);
     this->populations = createArrayList(3, INT);
 
+    // read all inputs and turn them into intagers then append them to populations list.
     int i;
     for (i = 0; i < argc; i++)
     {
@@ -20,6 +23,8 @@ InputManager *newInputManager(int argc, char *argv[])
     // this->populations->display(this->populations);
     return this;
 }
+
+// destructor
 void destroyInputManager(InputManager *this)
 {
     free(this->numericArgs);

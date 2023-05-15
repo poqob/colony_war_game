@@ -1,5 +1,6 @@
 #include "../../include/utils/DebugPrinter.h"
 
+// constructor of DebugPrinter
 DebugPrinter *newDebugPrinter()
 {
     DebugPrinter *this = (DebugPrinter *)malloc(sizeof(DebugPrinter));
@@ -8,7 +9,7 @@ DebugPrinter *newDebugPrinter()
     this->println = &printlnDebugPrinter;
     return this;
 }
-// dynamic print
+// dynamic print method
 void printDebugPrinter(void *exprassion, DataType dataType)
 {
     Colony *colony;
@@ -44,7 +45,7 @@ void printDebugPrinter(void *exprassion, DataType dataType)
     }
 }
 
-// dynamic print line
+// dynamic print line method
 void printlnDebugPrinter(void *exprassion, DataType dataType)
 {
     Colony *colony;
@@ -83,6 +84,7 @@ void printlnDebugPrinter(void *exprassion, DataType dataType)
     }
 }
 
+// destructor
 void destroyDebugPrinter(DebugPrinter *this)
 {
     free(this);

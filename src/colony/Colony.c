@@ -35,12 +35,14 @@ int getManufacturePower(Colony *colony)
 }
 
 // local function --private
-//  it creates propper strategy according to population count and attempts strategy type to colony.
+//  it creates proper strategy randomly and attempts strategy type to colony.
+// return type is void* because, it is not possible to know which strategy structure will be picked :D
 void *pickStrategy(Colony *colony)
 {
-    enum Strategies strategy = colony->population % 3; // 0-1-2 , 0= strategy0 ,1= st"1, 2= st"2
+    srand(time(NULL));
+    int rnum = (rand() + colony->population) % 3;
+    enum Strategies strategy = rnum; // 0-1-2 , 0= strategy0 ,1= st"1, 2= st"2
 
-    // TODO: edit 1-2 situations constructors.
     switch (strategy)
     {
     case strategy0:
@@ -53,18 +55,20 @@ void *pickStrategy(Colony *colony)
         return newStrategy1();
     case strategy2:
         colony->strategyType = strategy2;
-
         return newStrategy2();
-
     default:
         break;
     }
 }
 
 // local function --private
+// it creates proper manufacture structure randomly and atempts it to colony's manufactureType
+// return type is void* because, it is not possible to know which manufacture structure will be picked :D
 void *pickManufacture(Colony *colony)
 {
-    enum Manufactures manufacture = colony->population % 3; // 0-1-2, 0= manufacture0 ...
+    srand(time(NULL));
+    int rnum = (rand() + colony->population) % 3;
+    enum Manufactures manufacture = rnum; // 0-1-2, 0= manufacture0 ...
 
     switch (manufacture)
     {
@@ -84,6 +88,7 @@ void *pickManufacture(Colony *colony)
 };
 
 // local function --private
+// destroy picked strategy structure according to colony's strategyType.
 void destroyStrategy(Colony *colony)
 {
     // destroy strategy
@@ -104,6 +109,7 @@ void destroyStrategy(Colony *colony)
 }
 
 // local function --private
+// destroy picked manufacture structure according to colony's manufactureType.
 void destroyManufacture(Colony *colony)
 {
     // destroy manufacture
@@ -141,19 +147,25 @@ Colony *newColony(int population, int symbol)
 
     this->strategy = pickStrategy(this); // attempt strategy and strategy type.
 
-    this->manufacture = pickManufacture(this); // attempt manufacture and manufacture type.
-
+    this->manufacture = pickManufacture(this); // attempt manufacture and manufacture type randomly.
+    // attempt strategy's (which picked randomly) fightpower to Colony::fightpower(field) via (private)Colony::getFightPower()
     this->fightPower = getFightPower(this);
 
+    // attempt Manufacture's (which picked randomly) manufacture power to Colony::manufacturePower(field) via Colony::getManufacturePower()
     this->manufacturePower = getManufacturePower(this);
 
-    this->destroyColony = &destroyColony;
+    this->destroyColony = &destroyColony; // ~destruction
 
+    // grow method, the method increases colony's population per every single tour.
+    // Decreases foodstock and calls produce() method from ManufactureX structure.
     this->grow = &colonyGrow;
 
     this->toString = &toStringColony;
 
+    // the GameManager structure calls this method after every combat to report current(after combat) life status of the colony.
     this->reportLifeStatus = &colonyDeadControll;
+
+    return this;
 }
 
 void colonyGrow(Colony *this)
@@ -199,77 +211,89 @@ void colonyGrow(Colony *this)
     }
 }
 
+// destructor
 void destroyColony(Colony *this)
 {
+    // destroy the str which stores toString() method's result if it exists.
     if (this->str != NULL)
         this->str->destroy(this->str);
 
+    // destroy randomly attemted strategy
     destroyStrategy(this);
+    // destroy randomly attemted manufacture
     destroyManufacture(this);
-
+    // destroy the Colony.
     free(this);
 }
 
-// yahu ben bunu nasil silecegim bellekten??? kullanildigi yerde silinsin kullanima en uygun oyle oluyor
+// toString method: toString method creates a String structure on memory and attempts it to Colony's (STRING*)str field.
+// The purpose of the str pointer is to store the generated value in memory so that it can be destroyed during the destruction process.
 String *toStringColony(Colony *this)
 {
-    // output
-    String *output = newString("\n***************************\n");
 
-    // symbol
-    output->appendStr(output, newString("symbol: "));
-    output->appendChar(output, &this->symbol);
-    output->appendChar(output, "\n");
+    if (this->str == NULL)
+    {
+        // output
+        String *output = newString("\n***************************\n");
 
-    // life status
-    output->appendChar(output, "life status: ");
-    output->appendInt(output, this->amIALive);
-    output->appendChar(output, "\n");
+        // symbol
+        output->appendStr(output, newString("symbol: "));
+        output->appendChar(output, &this->symbol);
+        output->appendChar(output, "\n");
 
-    // population
-    output->appendChar(output, "population: ");
-    output->appendInt(output, this->population);
-    output->appendChar(output, "\n");
+        // life status
+        output->appendChar(output, "life status: ");
+        output->appendInt(output, this->amIALive);
+        output->appendChar(output, "\n");
 
-    // food stock
-    output->appendChar(output, "food stock: ");
-    output->appendInt(output, this->foodStock);
-    output->appendChar(output, "\n");
+        // population
+        output->appendChar(output, "population: ");
+        output->appendInt(output, this->population);
+        output->appendChar(output, "\n");
 
-    // strategy type
-    output->appendChar(output, "strategy type: ");
-    output->appendChar(output, StrategiesStrings[this->strategyType]);
-    output->appendChar(output, "\n");
+        // food stock
+        output->appendChar(output, "food stock: ");
+        output->appendInt(output, this->foodStock);
+        output->appendChar(output, "\n");
 
-    // fight power
-    output->appendChar(output, "fight power: ");
-    output->appendInt(output, this->fightPower);
-    output->appendChar(output, "\n");
+        // strategy type
+        output->appendChar(output, "strategy type: ");
+        output->appendChar(output, StrategiesStrings[this->strategyType]);
+        output->appendChar(output, "\n");
 
-    // Manufacturer type
-    output->appendChar(output, "Manufacturer type: ");
-    output->appendChar(output, ManufacturesStrings[this->manufactureType]);
-    output->appendChar(output, "\n");
+        // fight power
+        output->appendChar(output, "fight power: ");
+        output->appendInt(output, this->fightPower);
+        output->appendChar(output, "\n");
 
-    // Manufacturer power
-    output->appendChar(output, "Manufacture power: ");
-    output->appendInt(output, this->manufacturePower);
-    output->appendChar(output, "\n");
+        // Manufacturer type
+        output->appendChar(output, "Manufacturer type: ");
+        output->appendChar(output, ManufacturesStrings[this->manufactureType]);
+        output->appendChar(output, "\n");
 
-    // Victory count
-    output->appendChar(output, "Victories: ");
-    output->appendInt(output, this->victory);
-    output->appendChar(output, "\n");
+        // Manufacturer power
+        output->appendChar(output, "Manufacture power: ");
+        output->appendInt(output, this->manufacturePower);
+        output->appendChar(output, "\n");
 
-    // Loose count
-    output->appendChar(output, "Looses: ");
-    output->appendInt(output, this->loose);
-    output->appendChar(output, "\n***************************\n");
+        // Victory count
+        output->appendChar(output, "Victories: ");
+        output->appendInt(output, this->victory);
+        output->appendChar(output, "\n");
 
-    this->str = output;
-    return output;
+        // Loose count
+        output->appendChar(output, "Looses: ");
+        output->appendInt(output, this->loose);
+        output->appendChar(output, "\n***************************\n");
+        // attemt created string exprassion to
+        this->str = output;
+        return output;
+    }
+    else
+        return this->str;
 }
 
+// controlls the colony's life status, GameManager calls it after every single combat.
 void colonyDeadControll(Colony *this)
 {
     // controlling if food stock is under level zero.

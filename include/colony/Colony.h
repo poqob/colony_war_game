@@ -2,6 +2,7 @@
 #define COLONY
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "../utils/Bool.h"
 #include "../utils/String.h"
 #include "../strategy/Strategies.h"
@@ -22,30 +23,30 @@ typedef struct Colony Colony;
 
 struct Colony
 {
-    // fields
-    int foodStock;
-    int population;
-    boolean amIALive;
-    char symbol;
-    int victory;
-    int loose;
-    // If the toString method is called, a string data is stored in the memory.
-    // 'str' is a variable created to store the address of this created string and to perform its destruction.
-    String *str;
+  // fields
+  int foodStock;
+  int population;
+  boolean amIALive;
+  char symbol;
+  int victory;
+  int loose;
+  // If the toString method is called, a string data is stored in the memory.
+  // 'str' is a variable created to store the address of this created string and to perform its destruction.
+  String *str;
 
-    void *strategy;
-    enum Strategies strategyType; // stores which strategy struct picked.
+  void *strategy;
+  enum Strategies strategyType; // stores which strategy struct picked.
 
-    void *manufacture;
-    enum Manufactures manufactureType; // stores which manufacture struct picked.
-    // functions
-    void (*destroyColony)(Colony *);
-    void (*grow)(Colony *);
-    String *(*toString)(Colony *);
-    void (*reportLifeStatus)(Colony *);
+  void *manufacture;
+  enum Manufactures manufactureType; // stores which manufacture struct picked.
+  // functions
+  void (*destroyColony)(Colony *);
+  void (*grow)(Colony *);
+  String *(*toString)(Colony *);
+  void (*reportLifeStatus)(Colony *);
 
-    int fightPower;
-    int manufacturePower;
+  int fightPower;
+  int manufacturePower;
 };
 
 Colony *newColony(int, int);

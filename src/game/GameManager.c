@@ -1,12 +1,12 @@
 #include "../../include/game/GameManager.h"
-
+// constructor
 GameManager *newGameManager(ArrayList *populations)
 {
     // malloc
     GameManager *this = (GameManager *)malloc(sizeof(GameManager));
+
     // bind methods
     this->createPlayers = &createPlayersGm;
-
     this->logger = &loggerGm;
     this->destroy = &destroyGameManager;
     this->calculatePossibleWarCountPerRound = &calculatePossibleWarCountPerRoundGm;
@@ -14,25 +14,39 @@ GameManager *newGameManager(ArrayList *populations)
     this->growOrganizer = &growOrganizerGm;
     this->battle = &battleGm;
     this->versus = &versusGm;
+
     // fields setup
     this->totalWarCount = 0;
     this->tour = -1;
-    this->populations = populations; // done
-
-    this->SelectedSymbols = createArrayList(10, INT); // CHANGE
+    this->populations = populations;
+    this->SelectedSymbols = createArrayList(10, INT);
     this->generateRandomSymbols(this);
-    this->players = this->createPlayers(this);     // done
-    this->toursLogPack = createArrayList(25, PTR); // done
+    this->players = this->createPlayers(this);
+    this->toursLogPack = createArrayList(25, PTR);
+
+    return this;
 }
 
+/*
+this method collects all printable characters to a (int*)values list,
+then creates an ArrayList and randomly fetch unique symbols from values array.
+*/
+/*
+  numbers of printable characters
+  1-6
+  16-26
+  28-31
+  33-47
+*/
 void *generateRandomSymbolsGm(GameManager *this)
 {
     srand(time(NULL));
-    ArrayList *list = this->SelectedSymbols;
-    int *values = (int *)malloc(sizeof(int) * MAX_SYMBOL_COUNT); // carry out
+    ArrayList *list = this->SelectedSymbols; // this->SelectedSymbols initialized in constructor
+    int *values = (int *)malloc(sizeof(int) * MAX_SYMBOL_COUNT);
     time_t t;
     int count = 0;
     int tmp;
+
     // generate printable characters and add to possibleValues list
     int i;
     int num;
@@ -59,11 +73,11 @@ void *generateRandomSymbolsGm(GameManager *this)
     }
 
     // pick random characters from possibleValues, add to selected symbols list.
-    /* Intializes random number generator */
+
     srand((unsigned)time(&t));
 
     boolean doesContain = false;
-    while (1)
+    while (true)
     {
         num = rand() % (count);
 
@@ -76,6 +90,7 @@ void *generateRandomSymbolsGm(GameManager *this)
                 break;
             }
         }
+        // if choosed symbol does exist in our symbol list then continue to pick not exist one.
         if (doesContain == true)
         {
             doesContain = false;
@@ -89,7 +104,7 @@ void *generateRandomSymbolsGm(GameManager *this)
         if (list->size == this->populations->size)
             break;
     }
-    //    list->display(list);
+
     this->allSymbols = values;
 }
 
@@ -103,8 +118,7 @@ ArrayList *createPlayersGm(GameManager *this)
     int symbl;
     for (i = 0; i < this->populations->size; i++)
     {
-        //  printf("%d\n", *(int *)this->SelectedSymbols->get(this->SelectedSymbols, i));
-        colony = newColony(*(int *)this->populations->get(this->populations, i), *(int *)this->SelectedSymbols->get(this->SelectedSymbols, i)); // *(int *)this->SelectedSymbols->get(this->SelectedSymbols, i)
+        colony = newColony(*(int *)this->populations->get(this->populations, i), *(int *)this->SelectedSymbols->get(this->SelectedSymbols, i));
         players->append(players, colony);
     }
     return players;
@@ -150,7 +164,7 @@ int calculatePossibleWarCountPerRoundGm(ArrayList *colonies)
         return (colonyCount / 2) * colonyCount;
 }
 
-// called after every battle series (tour), grows colonies population and expands food stock.
+// called after every battle series (tour), grows colonies population and expands food stock also decreases foodstock.
 void growOrganizerGm(ArrayList *players)
 {
     Colony *col;
@@ -285,7 +299,8 @@ void versusGm(Colony *c0, Colony *c1)
 // destructor
 void destroyGameManager(GameManager *this)
 {
-    /*WILL BE CLEARED
+    /*
+    WILL BE CLEARED
     ArrayList *SelectedSymbols;
     ArrayList *players;
     ArrayList *toursLogPack;
