@@ -4,6 +4,10 @@
 #include "AStrategy.h"
 #include <stdlib.h>
 
+/*
+Strategy0 is a concrete implementation derived from the abstract class AStrategy that has the fight() and destroy() methods.
+*/
+
 #define S0FP 600 // strategy0 fight power
 typedef struct Strategy0 Strategy0;
 

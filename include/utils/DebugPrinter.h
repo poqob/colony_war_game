@@ -2,8 +2,10 @@
 #define DEBUG_PRINTER
 #include "../log/Log.h"
 #include "DataType.h"
-typedef struct DebugPrinter DebugPrinter;
 
+// Printer structure that I have written for displaying results during the project development phase.
+
+typedef struct DebugPrinter DebugPrinter;
 struct DebugPrinter
 {
     void (*print)(void *, DataType);

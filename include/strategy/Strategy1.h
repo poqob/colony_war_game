@@ -1,8 +1,10 @@
 #if !defined(STRATEGY1)
 #define STRATEGY1
-#define S1FP 800 // strategy1 fight power
-
 #include "AStrategy.h"
+/*
+Strategy1 is a concrete implementation derived from the abstract class AStrategy that has the fight() and destroy() methods.
+*/
+#define S1FP 800 // strategy1 fight power
 typedef struct Strategy1 Strategy1;
 
 struct Strategy1

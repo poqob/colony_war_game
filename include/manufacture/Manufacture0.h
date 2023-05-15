@@ -1,8 +1,12 @@
 #if !defined(MANUFACTURE0)
 #define MANUFACTURE0
-#define M0PP 9 // manufature 0 produce power
 #include "AManufacture.h"
 
+/*
+Manufacture0 is a concrete implementation derived from the abstract class AManufacture that has the produce() and destroy() methods.
+*/
+
+#define M0PP 9 // manufature 0 produce power
 typedef struct Manufacture0 Manufacture0;
 struct Manufacture0
 {

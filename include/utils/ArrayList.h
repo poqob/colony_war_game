@@ -5,6 +5,11 @@
 #include <stdio.h>
 #include "DataType.h"
 
+/*
+    ArrayList is a data structure for managing lists that can store all data types within the enum list in DataType.h.
+    It was coded in the planning phase of the project and shaped according to the needs of the project.
+*/
+
 typedef struct ArrayList ArrayList;
 
 struct ArrayList

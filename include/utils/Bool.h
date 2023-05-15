@@ -1,6 +1,6 @@
 #if !defined(BOOLE)
 #define BOOLE
-
+/// Boolean data structure.
 typedef enum
 {
     false = 0,

@@ -1,7 +1,5 @@
 #if !defined(COLONY)
 #define COLONY
-#define INDEX 1000
-#define POPULATION_SCALE_AS_PERCENTAGE 120
 #include <stdio.h>
 #include <stdlib.h>
 #include "../utils/Bool.h"
@@ -14,6 +12,11 @@
 #include "../manufacture/Manufacture0.h"
 #include "../manufacture/Manufacture1.h"
 #include "../manufacture/Manufacture2.h"
+/*This class includes the characteristics of a colony such as food stock, population, symbol, victory and defeat counts, fighting power and production power.
+ It also includes functions that exhibit different behaviors according to the selected strategy and production type.
+  The Colony class also includes functions for reporting the growth, death, and status of colonies, as well as for converting them to string data.*/
+#define INDEX 1000
+#define POPULATION_SCALE_AS_PERCENTAGE 120
 
 typedef struct Colony Colony;
 

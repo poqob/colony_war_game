@@ -9,6 +9,15 @@
 #include "../utils/ArrayList.h"
 #include "../log/Log.h"
 #include "../utils/DebugPrinter.h"
+
+/*
+    I designed the GameManager class to assist the Game class in controlling and managing data throughout the game.
+    During the development phase of the game, data communication between colonies was handled by the Game class.
+    However, I found it more appropriate to separate the data communication from the Game class and implemented it this way.
+    It is possible to further divide the GameManager into subclasses,
+    such as breaking down each method into a class with a special name like 'MethodManager'.
+   */
+
 #define MAX_SYMBOL_COUNT 40
 typedef struct GameManager GameManager;
 struct GameManager

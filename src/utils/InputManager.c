@@ -11,7 +11,7 @@ InputManager *newInputManager(int argc, char *argv[])
     for (i = 0; i < argc; i++)
     {
         if (i == 0)
-            continue; // -- first argument is 0
+            continue; // -- first argument is always 0
 
         this->numericArgs[i - 1] = atoi(argv[i]);
         // printf("--%d\n", this->numericArgs[i - 1]);

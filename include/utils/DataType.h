@@ -4,6 +4,8 @@
 #include "Bool.h"
 #include "../log/Log.h"
 
+// Enum of some data types supported by ArrayList in the project.
+
 typedef enum
 {
     CHAR,

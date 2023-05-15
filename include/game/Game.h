@@ -8,6 +8,8 @@
 #include <time.h>
 #include "GameManager.h"
 
+/*The 'Game' class collaborates with the data managed by the 'GameManager' class.
+The 'play()', 'destroy()', and 'Inspect()' methods within the 'Game' class control the flow of the game.*/
 typedef struct Game Game;
 
 struct Game

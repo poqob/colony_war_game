@@ -5,6 +5,9 @@
 #include <stdio.h>
 #include <math.h>
 #include <ctype.h>
+
+// String data type.
+
 typedef struct String String;
 struct String
 {

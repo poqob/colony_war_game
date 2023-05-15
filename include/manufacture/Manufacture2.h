@@ -1,8 +1,13 @@
 #if !defined(MANUFACTURE2)
 #define MANUFACTURE2
-#define M2PP 4 // manufature 2 produce power
+
 #include "AManufacture.h"
 
+/*
+Manufacture2 is a concrete implementation derived from the abstract class AManufacture that has the produce() and destroy() methods.
+*/
+
+#define M2PP 4 // manufature 2 produce power
 typedef struct Manufacture2 Manufacture2;
 struct Manufacture2
 {

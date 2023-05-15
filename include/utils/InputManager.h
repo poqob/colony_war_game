@@ -4,8 +4,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-typedef struct InputManager InputManager;
+// A substructure that manages the arguments entered into the main function for the proper execution of the game.
 
+typedef struct InputManager InputManager;
 struct InputManager
 {
     int *numericArgs;
